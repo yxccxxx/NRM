@@ -2,13 +2,13 @@
 // r0, r1 stores the input short retrieved from memory
 // r2, r3 stores the result value
 
-movm 0
+assign 0
 lw $r0  // load 16 bits 2's complement integer X into $r0 and $r1
 
 // get signed bit and save it in r1
 mov 0, $r0
-sr 15
-sl 15
+sr 1, 15
+sl 1, 15
 mov 1, $r2 
 
 beq $r2, 0
@@ -16,14 +16,12 @@ jmp exp
 
 // X is negative
 // 2's complement - 1, and then invert 
-mov 0, $r0
-sub 1, 1
-mov 1, $r0
-invert $r0
+mov 0, $r0 // move X to r14, r15
+sub 1, 1 // r14, r15 - 1
+mov 1, $r0 // move the updated value back to r0, r1
+invert $r0 // invert all bits in r0, r1
 
 // calculate exp value for floating point
-exp:
-
 // r4 = r0; r5 = r1;
 // r14 r15 = 0;
 // while(r0 != 1){
@@ -32,6 +30,7 @@ exp:
 // }
 // to calculate how many bits we need to shift in order to get
 // the 5 exp bits in floating point
+exp:
 mov 0, $r0
 mov 1, $r4
 assign 0
@@ -56,9 +55,7 @@ mov 1, $r2 // save the result back to r2, r3
 
 // calculate mantissa bits
 assign 16 // save 16 to r14, r15
-mov 1, $r6 // save 16 to r6, r7
-mov 0, $r4 // save count to r14, r15
-sub 1, $r6 // 16 - count stored in r14, r15
+sub 1, $r4 // 16 - count stored in r4, r5
 mov 1, $r4 // save 16 - count to r4, r5
 mov 0, $r0 // move r0, r1 to r14, r15
 sl 0, $r4 // $r0 r1 << (16 - count) to clear previous bits
@@ -66,5 +63,5 @@ sr 1, 6 // shift right to place mantissa bits on right position
 or 0, $r2 // or r14, r15 with r2, r3 to get the right result
 
 // store back to memory
-movm 2
+assign 2
 sw $r2
