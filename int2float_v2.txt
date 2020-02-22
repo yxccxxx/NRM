@@ -1,0 +1,128 @@
+// Assembly code for int2float program
+// r0, r1 stores the input short retrieved from memory
+// r2, r3 stores the result value
+
+assign 0
+lw $r0  // load MSB of integer X into $r0
+assign 1
+lw $r1 // load LSB of integer X into $r1
+
+// clear r2, r3 to be 0
+assign 0
+mov 1, $r2
+mov 1, $r3
+
+assign 0
+mov 1, $r4 // count = 0
+
+mov 0, $r0
+mov 1, $r5
+mov 0, $r1
+mov 1, $r6 // copy the initial number
+
+mov 0, $r5
+bne 1, 0
+jmp begin_while
+
+mov 0, $r6
+beq 1, 1
+jmp end_while
+
+begin_while:
+
+jmp decide_while
+
+mov 0, $r6
+sr 1, 1
+mov 1, $r6
+mov 0, $r5
+sr 1, 1
+mov 1, $r5 // a = a >> 1
+
+mov 0, $r4
+add 1, 1
+mov 1, $r4 // count += 1
+
+
+mov 0, $r5
+bne 1, 0
+jmp begin_while
+
+mov 0, $r6
+bne 1, 1
+jmp begin_while
+
+end_while:
+mov 0, $r4
+add 1, 15
+mov 1, $r7 // exp = count + 15
+
+mov 0, $r7
+sl 1, 2
+mov 1, $r7 // put exp at the right position of r7
+mov 1, $r2 // put exp at the right position of result
+
+// mantissa bits
+assign 16
+sub 1, $r4
+mov 1, $r4 // store 16 - count in r4
+
+mov 0, $r4
+beq 1, 0
+jmp end_shifts_1
+
+begin_shifts_1: // mantissa = init << (16 - count)
+
+mov 0, $r1
+sl 1, 1
+mov 1, $r1
+mov 0, $r0
+sl 1, 1
+mov 1, $r0
+
+mov 0, $r4
+bne 1, 0
+jmp begin_shifts_1
+
+end_shifts_1:
+
+assign 6
+mov 1, $r4 // assign 6 as count
+
+mov 0, $r4
+beq 1, 0
+jmp end_shifts_2
+
+begin_shifts_2:
+
+mov 0, $r0
+sr 1, 1
+mov 1, $r0
+mov 0, $r1
+sr 1, 1
+mov 1, 1
+
+mov 0, $r4
+sub 1, 1
+mov 1, $r4
+
+mov 0, $r4
+bne 1, 0
+jmp begin_shifts_2 // mantissa = mantissa >> 6
+
+end_shifts_2:
+
+mov 0, $r2
+or 0, $r0
+mov 1, $r2 // get MSB and store it to r2
+
+assign 2
+sw $r2 // store MSB back to memory
+
+mov 0, $r1
+mov 1, $r3 // store LSB to r3
+
+assign 3
+sw $r3 // store LSB back to memory
+
+

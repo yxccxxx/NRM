@@ -1,0 +1,168 @@
+// Assembly code for float_add program
+// r0, r1 stores float X retrieved from memory
+// r2, r3 stores float Y retrieved from memory
+
+// R0 r1 ==> X
+// R2 r3 ==> Y
+// R4 ==> X exp bits
+// R5 ==> Y exp bits
+// R6 r7 ==> X mantissa
+// R8 r9 ==> Y mantissa
+// R10 r11 ==> result
+// r12 ==> delta
+// r13 ==> res_exp
+// r15 ==> accumulator
+
+assign 8
+lw $r0 // load MSB of x
+assign 9
+lw $r1 // load LSB of x
+
+assign 10
+lw $r2 // load MSB of y 
+assign 11
+lw $r3 // load LSB of y
+
+mov 0, $r0
+sr 1, 2
+mov 1, $r4 // store x's exp bits
+
+mov 0, $r2
+sr 1, 2
+mov 1, $r5 // store y's exp bits
+
+mov 0, $r1
+mov 1, $r7 // store x's LSB mantissa
+
+mov 0, $r0
+sl 1, 6
+sr 1, 6
+mov 1, $r6 // store x's MSB mantissa
+
+mov 0, $r3
+mov 1, $r9 // store y's LSB mantissa
+
+mov 0, $r2
+sl 1, 6
+sr 1, 6
+mov 1, $r8 // store y's MSB mantissa
+
+mov 0, $r6
+add 1, 4
+mov 1, $r6 // add 0b00000100 to x's MSB mantissa
+
+mov 0, $r8
+add 1, 4
+mov 1, $r8 // add 0b00000100 to y's MSB mantissa
+
+assign 0
+mov 1, $r12 // delta = 0
+
+mov 0, $r4
+mov 1, $r13 // res_exp = x_exp
+
+mov 0, $r4
+bge 0, $r5
+jmp greater_and_equal
+
+mov 0, $r4 // when r5 < r4, which means x_exp > y_exp
+sub 0, $r5
+mov 1, $r12 // delta = x_exp - y_exp
+
+mov 0, $r12
+beq 1, 0
+jmp end_delta_1
+
+begin_delta_1:
+mov 0, $r6 
+sr 1, 1
+mov 1, $r6 
+
+mov 0, $r7 
+sr 1, 1
+mov 1, $r7 
+
+mov 0, $r12
+sub 1, 1 // decrease delta value by 1 in while loop
+mov 1, $r12
+bne 1, 0
+jmp begin_delta_1
+
+end_delta_1: // y_mantissa = y_mantissa >> delta
+
+greater_and_equal:
+mov 0, $r4
+beq 0, $r5
+jmp end_exp_comp 
+
+mov 0, $r5 // x_exp < y_exp
+sub 0, $r4
+mov 1, $r12 // delta = y_exp - x_exp
+
+mov 0, $r12
+beq 1, 0
+jmp end_delta_2
+
+begin_delta_2:
+mov 0, $r8 
+sr 1, 1
+mov 1, $r8 
+
+mov 0, $r9 
+sr 1, 1
+mov 1, $r9
+
+mov 0, $r12
+sub 1, 1 // decrease delta value by 1 in while loop
+mov 1, $r12
+bne 1, 0
+jmp begin_delta_2
+
+end_delta_2: // x_mantissa = x_mantissa >> delta
+mov 0, $r5
+mov 1, $r13 // res_exp = y_exp
+
+end_exp_comp:
+mov 0, $r7
+add 0, $r9
+mov 1, $r11 // add LSB mantissa of x and y
+
+mov 0, $r6
+add 0, $r8
+mov 1, $r10 // add MSB mantissa of x and y
+
+mov 0, $r10
+sr 1, 3
+beq 0, 0
+jmp no_overflow // update exp only if mantissa has overflow 
+
+mov 0, $10
+sr 1, 1
+mov 1, $10
+
+mov 0, $11
+sr 1, 1
+mov 1, $11 // res_mantissa = res_mantissa >> 1
+
+mov 0, $r13
+add 1, 1
+mov 1, $r13 // res_exp = res_exp + 1
+
+no_overflow:
+mov 0, $r10
+sub 1, 4
+mov 1, $r10 // res_mantissa = res_mantissa - 0b10000000000
+
+mov 0, $r13 
+sl 1, 2
+mov 1, $r13 // res_exp << 10
+
+mov 0, $r13
+add 0, $r10
+mov 1, $r10 // result = (res_exp << 10) + res_mantissa
+
+assign 12 // store the results back to memory
+sw $r10
+
+assign 13
+sw $r11
