@@ -30,8 +30,6 @@ jmp end_while
 
 begin_while:
 
-jmp decide_while
-
 mov 0, $r6
 sr 1, 1
 mov 1, $r6
@@ -42,7 +40,6 @@ mov 1, $r5 // a = a >> 1
 mov 0, $r4
 add 1, 1
 mov 1, $r4 // count += 1
-
 
 mov 0, $r5
 bne 1, 0
@@ -64,14 +61,15 @@ mov 1, $r2 // put exp at the right position of result
 
 // mantissa bits
 assign 16
-sub 1, $r4
+sub 0, $r4
 mov 1, $r4 // store 16 - count in r4
 
 mov 0, $r4
 beq 1, 0
 jmp end_shifts_1
 
-begin_shifts_1: // mantissa = init << (16 - count)
+// mantissa = init << (16 - count)
+begin_shifts_1:
 
 mov 0, $r1
 sl 1, 1

@@ -1,0 +1,156 @@
+10010000assign 0
+
+01010000lw $r0  // load MSB of integer X into $r0
+
+10010001assign 1
+
+01010001lw $r1 // load LSB of integer X into $r1
+
+10010000assign 0
+
+100010010mov 1, $r2
+
+100010011mov 1, $r3
+
+10010000assign 0
+
+100010100mov 1, $r4 // count = 0
+
+100000000mov 0, $r0
+
+100010101mov 1, $r5
+
+100000001mov 0, $r1
+
+100010110mov 1, $r6 // copy the initial number
+
+100000101mov 0, $r5
+
+101110000bne 1, 0
+
+110000110
+100000110mov 0, $r6
+
+001010001beq 1, 1
+
+110010111
+100000110mov 0, $r6
+
+010010001sr 1, 1
+
+100010110mov 1, $r6
+
+100000101mov 0, $r5
+
+010010001sr 1, 1
+
+100010101mov 1, $r5 // a = a >> 1
+
+100000100mov 0, $r4
+
+000010001add 1, 1
+
+100010100mov 1, $r4 // count += 1
+
+100000101mov 0, $r5
+
+101110000bne 1, 0
+
+111110001
+100000110mov 0, $r6
+
+101110001bne 1, 1
+
+111101101
+100000100mov 0, $r4
+
+000011111add 1, 15
+
+100010111mov 1, $r7 // exp = count + 15
+
+100000111mov 0, $r7
+
+001110010sl 1, 2
+
+100010111mov 1, $r7 // put exp at the right position of r7
+
+100010010mov 1, $r2 // put exp at the right position of result
+
+100110000assign 16
+
+000100100sub 0, $r4
+
+100010100mov 1, $r4 // store 16 - count in r4
+
+100000100mov 0, $r4
+
+001010000beq 1, 0
+
+110010000
+100000001mov 0, $r1
+
+001110001sl 1, 1
+
+100010001mov 1, $r1
+
+100000000mov 0, $r0
+
+001110001sl 1, 1
+
+100010000mov 1, $r0
+
+100000100mov 0, $r4
+
+101110000bne 1, 0
+
+111110101
+10010110assign 6
+
+100010100mov 1, $r4 // assign 6 as count
+
+100000100mov 0, $r4
+
+001010000beq 1, 0
+
+110010011
+100000000mov 0, $r0
+
+010010001sr 1, 1
+
+100010000mov 1, $r0
+
+100000001mov 0, $r1
+
+010010001sr 1, 1
+
+10001mov 1, 1
+
+100000100mov 0, $r4
+
+000110001sub 1, 1
+
+100010100mov 1, $r4
+
+100000100mov 0, $r4
+
+101110000bne 1, 0
+
+111110001
+100000010mov 0, $r2
+
+error: undefined opcode0or 0, $r0
+
+100010010mov 1, $r2 // get MSB and store it to r2
+
+10010010assign 2
+
+01100010sw $r2 // store MSB back to memory
+
+100000001mov 0, $r1
+
+100010011mov 1, $r3 // store LSB to r3
+
+10010011assign 3
+
+01100011sw $r3 // store LSB back to memory
+

@@ -1,0 +1,212 @@
+10011000assign 8
+
+01010000lw $r0 // load MSB of x
+
+10011001assign 9
+
+01010001lw $r1 // load LSB of x
+
+10011010assign 10
+
+01010010lw $r2 // load MSB of y 
+
+10011011assign 11
+
+01010011lw $r3 // load LSB of y
+
+100000000mov 0, $r0
+
+010010010sr 1, 2
+
+100010100mov 1, $r4 // store x's exp bits
+
+100000010mov 0, $r2
+
+010010010sr 1, 2
+
+100010101mov 1, $r5 // store y's exp bits
+
+100000001mov 0, $r1
+
+100010111mov 1, $r7 // store x's LSB mantissa
+
+100000000mov 0, $r0
+
+001110110sl 1, 6
+
+010010110sr 1, 6
+
+100010110mov 1, $r6 // store x's MSB mantissa
+
+100000011mov 0, $r3
+
+100011001mov 1, $r9 // store y's LSB mantissa
+
+100000010mov 0, $r2
+
+001110110sl 1, 6
+
+010010110sr 1, 6
+
+100011000mov 1, $r8 // store y's MSB mantissa
+
+100000110mov 0, $r6
+
+000010100add 1, 4
+
+100010110mov 1, $r6 // add 0b00000100 to x's MSB mantissa
+
+100001000mov 0, $r8
+
+000010100add 1, 4
+
+100011000mov 1, $r8 // add 0b00000100 to y's MSB mantissa
+
+10010000assign 0
+
+100011100mov 1, $r12 // delta = 0
+
+100000100mov 0, $r4
+
+100011101mov 1, $r13 // res_exp = x_exp
+
+100000100mov 0, $r4
+
+101000101bge 0, $r5
+
+110011100
+100000100mov 0, $r4 // when r5 < r4, which means x_exp > y_exp
+
+000100101sub 0, $r5
+
+100011100mov 1, $r12 // delta = x_exp - y_exp
+
+100001100mov 0, $r12
+
+001010000beq 1, 0
+
+110010010
+100000110mov 0, $r6 
+
+010010001sr 1, 1
+
+100010110mov 1, $r6 
+
+100000111mov 0, $r7 
+
+010010001sr 1, 1
+
+100010111mov 1, $r7 
+
+100001100mov 0, $r12
+
+000110001sub 1, 1 // decrease delta value by 1 in while loop
+
+100011100mov 1, $r12
+
+101110000bne 1, 0
+
+111110011
+100000100mov 0, $r4
+
+001000101beq 0, $r5
+
+110011110
+100000101mov 0, $r5 // x_exp < y_exp
+
+000100100sub 0, $r4
+
+100011100mov 1, $r12 // delta = y_exp - x_exp
+
+100001100mov 0, $r12
+
+001010000beq 1, 0
+
+110010010
+100001000mov 0, $r8 
+
+010010001sr 1, 1
+
+100011000mov 1, $r8 
+
+100001001mov 0, $r9 
+
+010010001sr 1, 1
+
+100011001mov 1, $r9
+
+100001100mov 0, $r12
+
+000110001sub 1, 1 // decrease delta value by 1 in while loop
+
+100011100mov 1, $r12
+
+101110000bne 1, 0
+
+111110011
+100000101mov 0, $r5
+
+100011101mov 1, $r13 // res_exp = y_exp
+
+100000111mov 0, $r7
+
+000001001add 0, $r9
+
+100011011mov 1, $r11 // add LSB mantissa of x and y
+
+100000110mov 0, $r6
+
+000001000add 0, $r8
+
+100011010mov 1, $r10 // add MSB mantissa of x and y
+
+100001010mov 0, $r10
+
+010010011sr 1, 3
+
+00100beq 0, 0
+
+110001110
+10000mov 0, $10
+
+010010001sr 1, 1
+
+10001mov 1, $10
+
+10000mov 0, $11
+
+010010001sr 1, 1
+
+10001mov 1, $11 // res_mantissa = res_mantissa >> 1
+
+100001101mov 0, $r13
+
+000010001add 1, 1
+
+100011101mov 1, $r13 // res_exp = res_exp + 1
+
+100001010mov 0, $r10
+
+000110100sub 1, 4
+
+100011010mov 1, $r10 // res_mantissa = res_mantissa - 0b10000000000
+
+100001101mov 0, $r13 
+
+001110010sl 1, 2
+
+100011101mov 1, $r13 // res_exp << 10
+
+100001101mov 0, $r13
+
+000001010add 0, $r10
+
+100011010mov 1, $r10 // result = (res_exp << 10) + res_mantissa
+
+10011100assign 12 // store the results back to memory
+
+01101010sw $r10
+
+10011101assign 13
+
+01101011sw $r11

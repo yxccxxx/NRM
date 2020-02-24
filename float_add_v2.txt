@@ -88,7 +88,8 @@ mov 1, $r12
 bne 1, 0
 jmp begin_delta_1
 
-end_delta_1: // y_mantissa = y_mantissa >> delta
+// y_mantissa = y_mantissa >> delta
+end_delta_1:
 
 greater_and_equal:
 mov 0, $r4
@@ -118,7 +119,8 @@ mov 1, $r12
 bne 1, 0
 jmp begin_delta_2
 
-end_delta_2: // x_mantissa = x_mantissa >> delta
+// x_mantissa = x_mantissa >> delta
+end_delta_2:
 mov 0, $r5
 mov 1, $r13 // res_exp = y_exp
 
