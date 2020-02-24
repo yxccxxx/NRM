@@ -1,18 +1,18 @@
-10011000assign 8
+100101000assign 8
 
-01010000lw $r0 // load MSB of x
+010100000lw $r0 // load MSB of x
 
-10011001assign 9
+100101001assign 9
 
-01010001lw $r1 // load LSB of x
+010100001lw $r1 // load LSB of x
 
-10011010assign 10
+100101010assign 10
 
-01010010lw $r2 // load MSB of y 
+010100010lw $r2 // load MSB of y 
 
-10011011assign 11
+100101011assign 11
 
-01010011lw $r3 // load LSB of y
+010100011lw $r3 // load LSB of y
 
 100000000mov 0, $r0
 
@@ -62,7 +62,7 @@
 
 100011000mov 1, $r8 // add 0b00000100 to y's MSB mantissa
 
-10010000assign 0
+100100000assign 0
 
 100011100mov 1, $r12 // delta = 0
 
@@ -74,7 +74,8 @@
 
 101000101bge 0, $r5
 
-110011100
+110011100jmp greater_and_equal
+
 100000100mov 0, $r4 // when r5 < r4, which means x_exp > y_exp
 
 000100101sub 0, $r5
@@ -85,7 +86,8 @@
 
 001010000beq 1, 0
 
-110010010
+110010010jmp end_delta_1
+
 100000110mov 0, $r6 
 
 010010001sr 1, 1
@@ -106,12 +108,14 @@
 
 101110000bne 1, 0
 
-111110011
+111110011jmp begin_delta_1
+
 100000100mov 0, $r4
 
 001000101beq 0, $r5
 
-110011110
+110011110jmp end_exp_comp 
+
 100000101mov 0, $r5 // x_exp < y_exp
 
 000100100sub 0, $r4
@@ -122,7 +126,8 @@
 
 001010000beq 1, 0
 
-110010010
+110010010jmp end_delta_2
+
 100001000mov 0, $r8 
 
 010010001sr 1, 1
@@ -143,7 +148,8 @@
 
 101110000bne 1, 0
 
-111110011
+111110011jmp begin_delta_2
+
 100000101mov 0, $r5
 
 100011101mov 1, $r13 // res_exp = y_exp
@@ -166,7 +172,8 @@
 
 00100beq 0, 0
 
-110001110
+110001110jmp no_overflow // update exp only if mantissa has overflow 
+
 10000mov 0, $10
 
 010010001sr 1, 1
@@ -203,10 +210,10 @@
 
 100011010mov 1, $r10 // result = (res_exp << 10) + res_mantissa
 
-10011100assign 12 // store the results back to memory
+100101100assign 12 // store the results back to memory
 
-01101010sw $r10
+011001010sw $r10
 
-10011101assign 13
+100101101assign 13
 
-01101011sw $r11
+011001011sw $r11

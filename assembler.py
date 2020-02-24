@@ -51,7 +51,14 @@ for i in range(2):
                 delta = 0b1111111 - abs(delta) + 1
             machine = '{0:07b}'.format(delta)
             return_rtype = opcode + machine
-            w_file.write(return_rtype + '\n' )
+            w_file.write(return_rtype + line+'\n' )
+            i += 1
+            continue
+        elif instruction == "assign":
+            opcode = "1001"
+            machine = '{0:05b}'.format(int(first_val))
+            return_rtype = opcode + machine
+            w_file.write(return_rtype + line+'\n' )
             i += 1
             continue
 
@@ -87,10 +94,6 @@ for i in range(2):
             first_machine = first_val[0]
             first_val = "reg" # the second value only stores registers
             second_val = str_array[2]
-        elif instruction == "assign":
-            opcode = "1001"
-            first_val = "imm"
-            second_val = str_array[1] # only one immediate
         elif instruction == "bge":
             opcode = "1010"
             second_val = str_array[2]
@@ -108,6 +111,8 @@ for i in range(2):
             first_machine = "1"
         elif instruction == "mov":
             first_machine = first_machine
+        elif first_val == "reg":
+            first_machine = "0"
         else:
             first_machine = ""
 
@@ -145,7 +150,7 @@ for i in range(2):
                 second_machine = "1110"
             elif second_val == "$r15":
                 second_machine = "1111"
-        elif first_val == "1," or first_val == "imm":
+        elif first_val == "1,":
             second_machine = '{0:04b}'.format(int(second_val))
             
         return_rtype = opcode + first_machine + second_machine

@@ -1,18 +1,18 @@
-10010000assign 0
+100100000assign 0
 
-01010000lw $r0  // load MSB of integer X into $r0
+010100000lw $r0  // load MSB of integer X into $r0
 
-10010001assign 1
+100100001assign 1
 
-01010001lw $r1 // load LSB of integer X into $r1
+010100001lw $r1 // load LSB of integer X into $r1
 
-10010000assign 0
+100100000assign 0
 
 100010010mov 1, $r2
 
 100010011mov 1, $r3
 
-10010000assign 0
+100100000assign 0
 
 100010100mov 1, $r4 // count = 0
 
@@ -28,12 +28,14 @@
 
 101110000bne 1, 0
 
-110000110
+110000110jmp begin_while
+
 100000110mov 0, $r6
 
 001010001beq 1, 1
 
-110010111
+110010111jmp end_while
+
 100000110mov 0, $r6
 
 010010001sr 1, 1
@@ -56,12 +58,14 @@
 
 101110000bne 1, 0
 
-111110001
+111110001jmp begin_while
+
 100000110mov 0, $r6
 
 101110001bne 1, 1
 
-111101101
+111101101jmp begin_while
+
 100000100mov 0, $r4
 
 000011111add 1, 15
@@ -86,7 +90,8 @@
 
 001010000beq 1, 0
 
-110010000
+110010000jmp end_shifts_1
+
 100000001mov 0, $r1
 
 001110001sl 1, 1
@@ -103,8 +108,9 @@
 
 101110000bne 1, 0
 
-111110101
-10010110assign 6
+111110101jmp begin_shifts_1
+
+100100110assign 6
 
 100010100mov 1, $r4 // assign 6 as count
 
@@ -112,7 +118,8 @@
 
 001010000beq 1, 0
 
-110010011
+110010011jmp end_shifts_2
+
 100000000mov 0, $r0
 
 010010001sr 1, 1
@@ -123,7 +130,7 @@
 
 010010001sr 1, 1
 
-10001mov 1, 1
+100010001mov 1, $r1
 
 100000100mov 0, $r4
 
@@ -135,22 +142,23 @@
 
 101110000bne 1, 0
 
-111110001
+111110001jmp begin_shifts_2 // mantissa = mantissa >> 6
+
 100000010mov 0, $r2
 
-error: undefined opcode0or 0, $r0
+000000000add 0, $r0
 
 100010010mov 1, $r2 // get MSB and store it to r2
 
-10010010assign 2
+100100010assign 2
 
-01100010sw $r2 // store MSB back to memory
+011000010sw $r2 // store MSB back to memory
 
 100000001mov 0, $r1
 
 100010011mov 1, $r3 // store LSB to r3
 
-10010011assign 3
+100100011assign 3
 
-01100011sw $r3 // store LSB back to memory
+011000011sw $r3 // store LSB back to memory
 
