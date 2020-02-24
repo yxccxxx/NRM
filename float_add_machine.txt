@@ -170,21 +170,21 @@
 
 010010011sr 1, 3
 
-00100beq 0, 0
+001010000beq 1, 0
 
 110001110jmp no_overflow // update exp only if mantissa has overflow 
 
-10000mov 0, $10
+100001010mov 0, $r10
 
 010010001sr 1, 1
 
-10001mov 1, $10
+100011010mov 1, $r10
 
-10000mov 0, $11
+100001011mov 0, $r11
 
 010010001sr 1, 1
 
-10001mov 1, $11 // res_mantissa = res_mantissa >> 1
+100011011mov 1, $r11 // res_mantissa = res_mantissa >> 1
 
 100001101mov 0, $r13
 
