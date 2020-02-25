@@ -19,19 +19,23 @@ for i in range(2):
             if ":" in line:
                 line_length = len(line)
                 labels[line[0:line_length-2]] = i
-            i += 1
+                continue
+            elif line == "" or line == "\n":
+                continue 
+            elif line[0:2] == "//":
+                continue
+            else:
+                i += 1
+
     print(labels)
     i = 0
     for line in cur_file:
         # skip empty line, labels and comments
         if line == "" or line == "\n":
-            i += 1
             continue
         elif ":" in line:
-            i += 1
             continue
         elif line[0:2] == "//":
-            i += 1
             continue
 
         print(line)
