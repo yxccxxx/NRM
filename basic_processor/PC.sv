@@ -6,10 +6,12 @@
 module PC(
   input init,
         jump_en,		// relative
-		branch_en,		// 
+		branch_en,
 		CLK,
-  output logic halt,
-  output logic[ 9:0] PC);
+  input [6:0] counter,  // how many instructions pc needs  to jump
+  output logic halt, 	// program halts
+  output logic[ 9:0] PC
+  );
 
 always @(posedge CLK)
   if(init) begin
@@ -19,14 +21,13 @@ always @(posedge CLK)
   else begin
     if(PC>63)
 	  halt <= 1;		 // just a randomly chosen number 
-	else if(branch_en) 
-	  PC <= PC + 7;
-    else if(jump_en) begin
-	  if(PC>13)
-	    PC <= PC - 14;
+	else if(jump_en) 
+	  if(counter[6] == 1)
+		PC <= PC - (7'b1111111 - (counter - 1));
 	  else
-	    halt <= 1;       // trap error condition
-	end
+		PC <= PC + counter;
+	else if(branch_en)
+	  PC <= PC + 2; // skip the next jump instruction to take the branch
 	else 
 	  PC <= PC + 1;	     // default == increment by 1
   end
