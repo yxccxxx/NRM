@@ -1,5 +1,6 @@
 
 print('Running Lab3:')
+print("label jump-to    ", "current address    ", "label address")
 
 filenames = ["int2float_v2.txt", "float_add_v2.txt"]
 out_files = ["int2float_machine.txt", "float_add_machine.txt"]
@@ -27,7 +28,6 @@ for i in range(2):
             else:
                 i += 1
 
-    print(labels)
     i = 0
     for line in cur_file:
         # skip empty line, labels and comments
@@ -38,33 +38,41 @@ for i in range(2):
         elif line[0:2] == "//":
             continue
 
-        print(line)
-
         str_array = line.split()
-        instruction = str_array[0]
-        first_val = str_array[1]
-        second_val = ''
-
-        first_machine = ''
-        second_machine = ''     
+        instruction = str_array[0]    
 
         if instruction == "jmp":
-            opcode = "11"
-            delta = labels[first_val] - i
-            if delta < 0:
-                delta = 0b1111111 - abs(delta) + 1
-            machine = '{0:07b}'.format(delta)
+            # label / current address / label address
+            print(str_array[1], "    ", bin(i), "    ", bin(labels[str_array[1]]))
+            opcode = "1111"
+            machine = "00000"
             return_rtype = opcode + machine
-            w_file.write(return_rtype + line+'\n' )
+            w_file.write(return_rtype + '\n' )
+            # delta = labels[first_val] - i
+            # if delta < 0:
+            #     delta = 0b1111111 - abs(delta) + 1
+            # machine = '{0:07b}'.format(delta)
             i += 1
             continue
         elif instruction == "assign":
             opcode = "1001"
-            machine = '{0:05b}'.format(int(first_val))
+            machine = '{0:05b}'.format(int(str_array[1]))
             return_rtype = opcode + machine
-            w_file.write(return_rtype + line+'\n' )
+            w_file.write(return_rtype + '\n' )
             i += 1
             continue
+        elif instruction == "clrsc":
+            opcode = "1100"
+            machine = "00000"
+            return_rtype = opcode + machine
+            w_file.write(return_rtype + '\n' )
+            i += 1
+            continue
+
+        first_val = str_array[1]
+        second_val = ''
+        first_machine = ''
+        second_machine = '' 
 
         if instruction == "add":
             opcode = "0000"
@@ -77,10 +85,12 @@ for i in range(2):
             second_val = str_array[2]
         elif instruction == "sl":
             opcode = "0011"
-            second_val = str_array[2]
+            first_val = "reg"
+            second_val = str_array[1] # only one register
         elif instruction == "sr":
             opcode = "0100"
-            second_val = str_array[2] 
+            first_val = "reg"
+            second_val = str_array[1] # only one register
         elif instruction == "lw": 
             opcode = "0101"
             first_val = "reg"
@@ -89,10 +99,9 @@ for i in range(2):
             opcode = "0110"
             first_val = "reg"
             second_val = str_array[1] # only one register
-        elif instruction == "invert":
+        elif instruction == "and":
             opcode = "0111" 
-            first_val = "reg"
-            second_val = str_array[1] # only one register
+            second_val = str_array[2]
         elif instruction == "mov":
             opcode = "1000"
             first_machine = first_val[0]
@@ -158,7 +167,7 @@ for i in range(2):
             second_machine = '{0:04b}'.format(int(second_val))
             
         return_rtype = opcode + first_machine + second_machine
-        w_file.write(return_rtype + line+'\n' )
+        w_file.write(return_rtype + '\n' )
         i += 1
 
     w_file.close()
