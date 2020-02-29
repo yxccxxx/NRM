@@ -30,14 +30,13 @@ jmp end_while
 
 begin_while:
 
-mov 0, $r6
-sr 1, 1
-mov 1, $r6
-mov 0, $r5
-sr 1, 1
-mov 1, $r5 // a = a >> 1
+// a = a >> 1
+clrsc
+sr $r6
+sr $r5
 
 mov 0, $r4
+clrsc
 add 1, 1
 mov 1, $r4 // count += 1
 
@@ -51,16 +50,20 @@ jmp begin_while
 
 end_while:
 mov 0, $r4
+clrsc
 add 1, 15
 mov 1, $r7 // exp = count + 15
 
+clrsc
+sl $r7
+sl $r7
 mov 0, $r7
-sl 1, 2
 mov 1, $r7 // put exp at the right position of r7
 mov 1, $r2 // put exp at the right position of result
 
 // mantissa bits
 assign 16
+clrsc
 sub 0, $r4
 mov 1, $r4 // store 16 - count in r4
 
@@ -71,12 +74,14 @@ jmp end_shifts_1
 // mantissa = init << (16 - count)
 begin_shifts_1:
 
-mov 0, $r1
-sl 1, 1
-mov 1, $r1
-mov 0, $r0
-sl 1, 1
-mov 1, $r0
+clrsc
+sl $r1
+sl $r0
+
+mov 0, $r4
+clrsc
+sub 1, 1
+mov 1, $r4
 
 mov 0, $r4
 bne 1, 0
@@ -93,14 +98,12 @@ jmp end_shifts_2
 
 begin_shifts_2:
 
-mov 0, $r0
-sr 1, 1
-mov 1, $r0
-mov 0, $r1
-sr 1, 1
-mov 1, $r1
+clrsc
+sr $r0
+sr $r1
 
 mov 0, $r4
+clrsc
 sub 1, 1
 mov 1, $r4
 
@@ -111,6 +114,7 @@ jmp begin_shifts_2 // mantissa = mantissa >> 6
 end_shifts_2:
 
 mov 0, $r2
+clrsc
 add 0, $r0
 mov 1, $r2 // get MSB and store it to r2
 
@@ -122,5 +126,3 @@ mov 1, $r3 // store LSB to r3
 
 assign 3
 sw $r3 // store LSB back to memory
-
-
