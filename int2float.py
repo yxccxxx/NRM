@@ -16,18 +16,25 @@ while a != 1:   # !(MSB == 0 && LSB == 1)
     a = a >> 1
     count += 1
 exp = count + 15
-exp = exp << 10
-result |= exp
-print(bin(result))
+i = 0
+while(i < 2):
+    exp = exp << 1
+    i += 1
+print(bin(exp))
 
 # mantissa
-mantissa = init << (16 - count)
+shifts = 16 - count
+while shifts > 0:
+    init = init << 1
+    shifts -= 1
+init -= 0b10000000000000000
+print(bin(init))
 
-mantissa = mantissa >> 6
-print(bin(mantissa))
-result |= mantissa
+init = init >> 6
+print(bin(init))
+result = (exp << 8) + init
 
-print("2's complement", init, "the floating point is", bin(result))
+print("2's complement", a, "the floating point is", bin(result))
 
 
 

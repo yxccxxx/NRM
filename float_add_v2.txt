@@ -24,34 +24,38 @@ assign 11
 lw $r3 // load LSB of y
 
 mov 0, $r0
-sr 1, 2
 mov 1, $r4 // store x's exp bits
+clrsc
+sr $r4
+sr $r4
 
 mov 0, $r2
-sr 1, 2
 mov 1, $r5 // store y's exp bits
+clrsc
+sr $r5
+sr $r5
 
 mov 0, $r1
 mov 1, $r7 // store x's LSB mantissa
 
 mov 0, $r0
-sl 1, 6
-sr 1, 6
+and 1, 3
 mov 1, $r6 // store x's MSB mantissa
 
 mov 0, $r3
 mov 1, $r9 // store y's LSB mantissa
 
 mov 0, $r2
-sl 1, 6
-sr 1, 6
+and 1, 3
 mov 1, $r8 // store y's MSB mantissa
 
 mov 0, $r6
+clrsc
 add 1, 4
 mov 1, $r6 // add 0b00000100 to x's MSB mantissa
 
 mov 0, $r8
+clrsc
 add 1, 4
 mov 1, $r8 // add 0b00000100 to y's MSB mantissa
 
@@ -66,6 +70,7 @@ bge 0, $r5
 jmp greater_and_equal
 
 mov 0, $r4 // when r5 < r4, which means x_exp > y_exp
+clrsc
 sub 0, $r5
 mov 1, $r12 // delta = x_exp - y_exp
 
@@ -74,15 +79,12 @@ beq 1, 0
 jmp end_delta_1
 
 begin_delta_1:
-mov 0, $r6 
-sr 1, 1
-mov 1, $r6 
-
-mov 0, $r7 
-sr 1, 1
-mov 1, $r7 
+clrsc
+sr $r6
+sr $r7
 
 mov 0, $r12
+clrsc
 sub 1, 1 // decrease delta value by 1 in while loop
 mov 1, $r12
 bne 1, 0
@@ -97,6 +99,7 @@ beq 0, $r5
 jmp end_exp_comp 
 
 mov 0, $r5 // x_exp < y_exp
+clrsc
 sub 0, $r4
 mov 1, $r12 // delta = y_exp - x_exp
 
@@ -105,15 +108,12 @@ beq 1, 0
 jmp end_delta_2
 
 begin_delta_2:
-mov 0, $r8 
-sr 1, 1
-mov 1, $r8 
-
-mov 0, $r9 
-sr 1, 1
-mov 1, $r9
+clrsc
+sr $r8
+sr $r9
 
 mov 0, $r12
+clrsc
 sub 1, 1 // decrease delta value by 1 in while loop
 mov 1, $r12
 bne 1, 0
@@ -126,6 +126,7 @@ mov 1, $r13 // res_exp = y_exp
 
 end_exp_comp:
 mov 0, $r7
+clrsc
 add 0, $r9
 mov 1, $r11 // add LSB mantissa of x and y
 
@@ -134,19 +135,16 @@ add 0, $r8
 mov 1, $r10 // add MSB mantissa of x and y
 
 mov 0, $r10
-sr 1, 3
+and 1, 8
 beq 1, 0
 jmp no_overflow // update exp only if mantissa has overflow 
 
-mov 0, $r10
-sr 1, 1
-mov 1, $r10
-
-mov 0, $r11
-sr 1, 1
-mov 1, $r11 // res_mantissa = res_mantissa >> 1
+clrsc
+sr $r10
+sr $r11 // res_mantissa = res_mantissa >> 1
 
 mov 0, $r13
+clrsc
 add 1, 1
 mov 1, $r13 // res_exp = res_exp + 1
 
@@ -155,11 +153,12 @@ mov 0, $r10
 sub 1, 4
 mov 1, $r10 // res_mantissa = res_mantissa - 0b10000000000
 
-mov 0, $r13 
-sl 1, 2
-mov 1, $r13 // res_exp << 10
+clrsc
+sl $r13
+sl $r13 // res_exp << 10
 
 mov 0, $r13
+clrsc
 add 0, $r10
 mov 1, $r10 // result = (res_exp << 10) + res_mantissa
 
