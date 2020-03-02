@@ -1,0 +1,115 @@
+// load values in memory location 4 and 5 into $r0 and $r1
+assign 4
+lw $r0
+assign 5
+lw $r1
+
+// r0 r1 store mantissa (with hidden bit added), r2 store exp
+mov 0 $r0
+sr 1 2
+mov 1 $r2
+mov 0 $r0 
+and 1 3
+add 1 4
+mov 1 $r0
+
+// compare exp with 14, if smaller, return 0
+assign 14
+bge 0 $r2
+jmp nonzero
+assign 0
+mov 1 $r0
+mov 1 $r1
+jmp end
+
+// nonzero case
+nonzero:
+
+// compare exp with 25. If greater, left shift 
+assign 25
+bge 0 $r2
+jmp left_shift
+
+// get the numer of bit to right shift, store in r3
+sub 0 $r2
+mov 1 $r3
+
+// r4 r5 are two factors two determine whether to round up
+assign 0
+mov 1 $r4
+mov 1 $r5
+
+// right shift loop
+right_shift_loop:
+mov 0 $r3
+beq 1 0
+jmp right_shift_loop_done
+beq 1 1
+jmp first_fraction
+
+// or the current fraction bit with r5 accumulatively
+mov 0 $r1
+and 1 1
+or 0 $r5
+mov 1 $r5
+jmp right_shift
+
+// put the first fraction bit to r4
+first_fraction:
+mov 0 $r1
+and 1 1
+mov 1 $r4
+
+// right shift the mantissa 
+right_shift:
+clrsc
+sr $r0
+sr $r1
+
+// number of bits to shift --
+mov 0 $r3
+sub 1 1
+mov 1 $r3
+jmp right_shift_loop
+
+right_shift_loop_done:
+// if the lsb of integer part is odd, or r5 with 1. 
+mov 0 $r1
+and 1 1
+or 0 $r5
+
+// and r4 with r5 to determine whether to roundup
+and 0 $r4
+mov 1 $r4
+
+// roundup 
+clrsc
+mov 0 $r1
+add 0 $r4
+mov 1 $r1
+mov 0 $r0
+add 1 0
+mov 1 $r0
+jmp end
+
+// left shift, first get the number of bits to shift
+left_shift:
+mov 0 $r2
+sub 1 12
+sub 1 13
+
+// left shift loop
+left_shift_loop:
+beq 1 0
+jmp end
+clrsc
+sl $r1
+sl $r0
+sub 1 1
+jmp left_shift_loop
+
+end:
+assign 6
+sw $r0
+assign 7
+sw $r1
