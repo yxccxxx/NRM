@@ -59,7 +59,6 @@ module ALU(
     SR: {OUT, SC_OUT} = {SC_IN, reg_acc}; 
     LW: ;
     SW: OUT = reg_in;
-    INVERT: ;// TODO
     MOV: begin
       if(reg_to_acc)
         OUT = reg_in;
@@ -94,6 +93,18 @@ module ALU(
         else
           BRANCH = 1; // pc = pc + 2
         end
+      end
+    AND: begin
+      if(reg_exe == 1)
+        OUT = reg_acc & reg_in;
+      else
+        OUT = reg_acc & imm_in;
+      end
+    OR: begin
+      if(reg_exe == 1)
+        OUT = reg_acc | reg_in;
+      else
+        OUT = reg_acc | imm_in;
       end
     default: {SC_OUT,OUT} = 0;
   endcase

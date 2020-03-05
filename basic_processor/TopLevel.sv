@@ -106,10 +106,10 @@ logic       SC_IN;         // carry register (loop with ALU)
 	);
   
 	data_mem data_mem(
-		.CLK 		  		     ,
+		.CLK 		  		 ,
 		.reset		  (start),
-		.DataAddress      , 
-		.ReadMem      (1'b1),          //(MEM_READ) ,   always enabled 
+		.DataAddress  (out_acc), 
+		.ReadMem      (load_inst),    
 		.WriteMem     (store_inst), 
 		.DataIn       (memWriteValue), 
 		.DataOut      (Mem_Out) 
