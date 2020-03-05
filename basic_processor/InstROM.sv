@@ -18,7 +18,7 @@ module InstROM #(parameter A=12, W=10) (
   always_comb InstOut = inst_rom[InstAddress];
  
   initial begin		                  // load from external text file
-  	$readmemb("machine_code.txt",inst_rom);
+  	$readmemb("int2float_machine.txt",inst_rom);
   end 
   
 endmodule
