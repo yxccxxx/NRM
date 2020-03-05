@@ -2,11 +2,13 @@
 print('Running Lab3:')
 print("label jump-to    ", "current address    ", "label address")
 
-filenames = ["int2float_v2.txt", "float_add_v2.txt"]
-out_files = ["int2float_machine.txt", "float_add_machine.txt"]
+filenames = ["int2float_v2.txt", "float2int_assembly.txt", "float_add_v2.txt"]
+out_files = ["int2float_machine.txt", "float2int_machine.txt", "float_add_machine.txt"]
 labels = {}
 
-for i in range(2):
+for i in range(3):
+    print("\n")
+    print("filename: ", filenames[i])
 
     #w_file is the file we are writing to
     w_file = open(out_files[i], "w")
@@ -29,6 +31,7 @@ for i in range(2):
                 i += 1
 
     i = 0
+    label_num = 0
     for line in cur_file:
         # skip empty line, labels and comments
         if line == "" or line == "\n":
@@ -42,12 +45,13 @@ for i in range(2):
         instruction = str_array[0]    
 
         if instruction == "jmp":
-            # label / current address / label address
-            print(str_array[1], "    ", bin(i), "    ", bin(labels[str_array[1]]))
             opcode = "1111"
-            machine = "00000"
+            machine = '{0:05b}'.format(label_num)
+            label_num += 1
             return_rtype = opcode + machine
             w_file.write(return_rtype + '\n' )
+            # label / current address / label address
+            print(str_array[1], "    ", machine, "    ", '{0:010b}'.format(labels[str_array[1]]))
             # delta = labels[first_val] - i
             # if delta < 0:
             #     delta = 0b1111111 - abs(delta) + 1
@@ -113,14 +117,17 @@ for i in range(2):
         elif instruction == "bne":
             opcode = "1011"
             second_val = str_array[2]
+        elif instruction == "or":
+            opcode = "1101" 
+            second_val = str_array[2]
         else:
             opcode = "error: undefined opcode"
             print("error: undefined opcode")
         
         # translate first value
-        if first_val == "0,":
+        if first_val == "0," or first_val == "0":
             first_machine = "0"
-        elif first_val == "1,":
+        elif first_val == "1," or first_val == "1":
             first_machine = "1"
         elif instruction == "mov":
             first_machine = first_machine
@@ -130,7 +137,7 @@ for i in range(2):
             first_machine = ""
 
         # translate second value
-        if first_val == "0," or first_val == "reg":
+        if first_val == "0," or first_val == "0" or first_val == "reg":
             if second_val == "$r0":
                 second_machine = "0000"
             elif second_val == "$r1":
@@ -163,7 +170,7 @@ for i in range(2):
                 second_machine = "1110"
             elif second_val == "$r15":
                 second_machine = "1111"
-        elif first_val == "1,":
+        elif first_val == "1," or first_val == "1":
             second_machine = '{0:04b}'.format(int(second_val))
             
         return_rtype = opcode + first_machine + second_machine
