@@ -71,6 +71,7 @@ logic       SC_IN;         // carry register (loop with ALU)
 	assign sl_inst = Instruction[8:5] == 3'b0011;
 	assign sr_inst = Instruction[8:5] == 3'b0100;
 	assign reg_wr_addr = (store_inst || sl_inst || sr_inst)? Instruction[3:0] : 4'b1111;
+	assign reg_wr_en = store_inst || sl_inst || sr_inst;
 
 	// reg file
 	reg_file #(.W(8),.D(4)) reg_file (
