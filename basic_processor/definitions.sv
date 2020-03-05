@@ -32,7 +32,9 @@ typedef enum logic[3:0] {
 	ASSIGN = 4'b1001;
 	BGE = 4'b1010;
     BNE = 4'b1011;
-    JMP = 2'b11;
+    CLRSC = 4'b1100;
+    OR = 4'b1101;
+    JMP = 4'b1111;
 } op_mne;
 
 endpackage // definitions
