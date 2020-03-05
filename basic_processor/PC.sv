@@ -8,7 +8,6 @@ module PC(
         jump_en,		// relative
 		branch_en,
 		CLK,
-  input [6:0] counter,  // how many instructions pc needs  to jump
   input [9:0] destination, // jump destination
   output logic halt, 	// program halts
   output logic[ 9:0] PC
