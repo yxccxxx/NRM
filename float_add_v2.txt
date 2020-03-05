@@ -27,12 +27,14 @@ mov 0, $r0
 mov 1, $r4 // store x's exp bits
 clrsc
 sr $r4
+clrsc
 sr $r4
 
 mov 0, $r2
 mov 1, $r5 // store y's exp bits
 clrsc
 sr $r5
+clrsc
 sr $r5
 
 mov 0, $r1
@@ -155,6 +157,7 @@ mov 1, $r10 // res_mantissa = res_mantissa - 0b10000000000
 
 clrsc
 sl $r13
+clrsc
 sl $r13 // res_exp << 10
 
 mov 0, $r13
