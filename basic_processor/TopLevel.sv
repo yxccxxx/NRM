@@ -10,6 +10,7 @@ module TopLevel(		   // you will have the same 3 ports
     );
 
 wire [ 9:0] PC;            // program count
+wire [ 9:0] destination;   // jump destination
 wire [ 8:0] Instruction;   // our 9-bit opcode
 wire [ 7:0] out_acc, 
 			out_reg;       // reg_file outputs
@@ -37,7 +38,7 @@ logic       SC_IN;         // carry register (loop with ALU)
 		.jump_en           ,  // jump enable
 		.branch_en	       ,  // branch enable
 		.CLK        (CLK)  ,  // (CLK) is required in Verilog, optional in SystemVerilog
-		.counter   (target),  // where pc should jump to
+		.destination       ,  // jump destination
 		.halt              ,  // SystemVerilg shorthand for .halt(halt), 
 		.PC             	  // program count = index to instruction memory
 	);					  
@@ -116,7 +117,7 @@ logic       SC_IN;         // carry register (loop with ALU)
 
 	LUT look_up_table (
 		.addr   (Instruction[4:0]),
-		.target (DEST)
+		.target (destination)
 	);
 	
 // count number of instructions executed
