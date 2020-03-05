@@ -27,12 +27,14 @@ typedef enum logic[3:0] {
     SR = 4'b0100;
 	LW = 4'b0101;
 	SW = 4'b0110;
-    INVERT = 4'b0111;
+    AND = 4'b0111;
     MOV = 4'b1000;
 	ASSIGN = 4'b1001;
 	BGE = 4'b1010;
     BNE = 4'b1011;
-    JMP = 2'b11;
+    CLRSC = 4'b1100;
+    OR = 4'b1101;
+    JMP = 4'b1111;
 } op_mne;
 
 endpackage // definitions

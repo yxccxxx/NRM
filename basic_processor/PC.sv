@@ -22,10 +22,7 @@ always @(posedge CLK)
     if(PC>63)
 	  halt <= 1;		 // just a randomly chosen number 
 	else if(jump_en) 
-	  if(counter[6] == 1)
-		PC <= PC - (7'b1111111 - (counter - 1));
-	  else
-		PC <= PC + counter;
+	  PC <= counter;
 	else if(branch_en)
 	  PC <= PC + 2; // skip the next jump instruction to take the branch
 	else 

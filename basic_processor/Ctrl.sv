@@ -25,10 +25,16 @@ always_comb
   else
     jump_en = 0;
 
+  if(Instruction[8:5] == CLRSC)
+    sc_clr = 1
+  else
+    sc_clr = 0
+
   if(Instruction[8:5] == ADD || Instruction[8:5] == SUB || 
     Instruction[8:5] == BEQ || Instruction[8:5] == SL ||
     Instruction[8:5] == SR || Instruction[8:5] == BGE ||
-    Instruction[8:5] == BNE) begin
+    Instruction[8:5] == BNE || Instruction[8:5] == AND ||
+    Instruction[8:5] == OR) begin
 
     if(Instruction[4] == 0) begin
       reg_exe = 1
@@ -43,6 +49,13 @@ always_comb
     reg_exe = 0
     imm_exe = 0
     end
+
+  // enable carry in = carry out for add/sub/sl/sr
+  if(Instruction[8:5] == ADD || Instruction[8:5] == SUB || 
+    Instruction[8:5] == SR || Instruction[8:5] == SL)
+    sc_en = 1
+  else
+    sc_en = 0
 
   if(Instruction[8:5] == LW)
     mem_to_reg = 1
