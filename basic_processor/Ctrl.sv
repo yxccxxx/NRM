@@ -36,7 +36,25 @@ always_comb begin
     SW: reg_to_mem = 1;
     ASSIGN: assign_val = 1;
     CLRSC: sc_clr = 1;
+    MOV: begin
+      if(Instruction[4]) == 0
+        reg_to_acc = 1;
+      else
+        acc_to_reg = 1;
+      end
+    JMP: jump_en = 1;
+    default:;
   endcase
+
+  if(Instruction[8:5] == ADD || Instruction[8:5] == SUB || 
+    Instruction[8:5] == BEQ || Instruction[8:5] == AND ||
+    Instruction[8:5] == OR || Instruction[8:5] == BGE ||
+    Instruction[8:5] == BNE) begin
+    if(Instruction[4] == 0)
+      reg_exe = 1;
+    else
+      imm_exe = 1;
+    end
 end
   // if(Instruction[8:5] == JMP)
   //   jump_en = 1;
