@@ -25,11 +25,10 @@ module int2flt_tb();
 	 .req (req),
      .reset(reset),
      .done(ack));	         // 
-  int2flt f3(				 // your DUT goes here
-    .clk  (clk),			 //  rename module & ports
-    .req  (req),
-	.reset(reset),			 //  as necessary
-    .done (ack2));          
+  TopLevel f3(				 // your DUT goes here
+    .CLK  (clk),			 //  rename module & ports
+	.start(reset),			 //  as necessary
+    .halt (ack2));          
 
   always begin               // clock 
     #5ns clk = '1;			 
@@ -75,20 +74,20 @@ module int2flt_tb();
     logic[ 4:0] exp_dut;
     logic[11:0] mant_dut;
     req = '1;
-	f2.data_mem1.mem_core[0][7:0] = int_in[15:8];	 // load operands into memory
-	f2.data_mem1.mem_core[1][7:0] = int_in[ 7:0];
-	f3.data_mem1.mem_core[0][7:0] = int_in[15:8];	 // load operands into memory
-	f3.data_mem1.mem_core[1][7:0] = int_in[ 7:0];
+	f2.data_mem.core[0][7:0] = int_in[15:8];	 // load operands into memory
+	f2.data_mem.core[1][7:0] = int_in[ 7:0];
+	f3.data_mem.core[0][7:0] = int_in[15:8];	 // load operands into memory
+	f3.data_mem.core[1][7:0] = int_in[ 7:0];
 	sgn            = int_in[15]; 
-	f2.data_mem1.mem_core[0][7]   = sgn;            // sign bit passes through
-	f3.data_mem1.mem_core[0][7]   = sgn;            // sign bit passes through
+	f2.data_mem.core[0][7]   = sgn;            // sign bit passes through
+	f3.data_mem.core[0][7]   = sgn;            // sign bit passes through
     flt_out_dut[15]     = sgn;
     flt_out2[15]        = sgn;
     flt_out3[15]        = sgn;
 	#20ns req           = '0;
 	#40ns wait(ack2)
-  	flt_out2[14:0] = {f2.data_mem1.mem_core[2][7:0],f2.data_mem1.mem_core[3][7:0]};	 // read results from memory
-    flt_out3[14:0] = {f3.data_mem1.mem_core[2][7:0],f3.data_mem1.mem_core[3][7:0]};	 // same from dummy DUT
+  	flt_out2[14:0] = {f2.data_mem.core[2][7:0],f2.data_mem.core[3][7:0]};	 // read results from memory
+    flt_out3[14:0] = {f3.data_mem.core[2][7:0],f3.data_mem.core[3][7:0]};	 // same from dummy DUT
     $display("what's feeding the case %b",int_in);
 	exp_dut  = 0;		   
 	mant_dut = 0;

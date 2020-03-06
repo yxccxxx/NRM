@@ -3,7 +3,7 @@
 // leverage a few-bit pointer to a wider number
 module LUT(
   input[4:0] addr,
-  output logic[9:0] target
+  output logic[9:0] Target
   );
 
 always_comb 

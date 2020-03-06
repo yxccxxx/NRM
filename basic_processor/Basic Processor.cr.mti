@@ -1,0 +1,196 @@
+C:/Users/yikua/Documents/cse141l/NRM/basic_processor/ALU.sv {0 {vlog -work work -sv C:/Users/yikua/Documents/cse141l/NRM/basic_processor/ALU.sv
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+Start time: 15:50:42 on Mar 05,2020
+vlog -reportprogress 300 -work work -sv C:/Users/yikua/Documents/cse141l/NRM/basic_processor/ALU.sv 
+** Error: C:/Users/yikua/Documents/cse141l/NRM/basic_processor/ALU.sv(8): (vlog-13006) Could not find the package (definitions).  Design read will continue, but expect a cascade of errors after this failure.  Furthermore if you experience a vopt-7 error immediately before this error then please check the package names or the library search paths on the command line.
+
+End time: 15:50:42 on Mar 05,2020, Elapsed time: 0:00:00
+Errors: 1, Warnings: 0
+
+} {5.0 6.0} {}} C:/Users/yikua/Documents/cse141l/NRM/basic_processor/TopLevel.sv {0 {vlog -work work -sv C:/Users/yikua/Documents/cse141l/NRM/basic_processor/TopLevel.sv
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+Start time: 15:50:42 on Mar 05,2020
+vlog -reportprogress 300 -work work -sv C:/Users/yikua/Documents/cse141l/NRM/basic_processor/TopLevel.sv 
+-- Compiling module TopLevel
+** Error: C:/Users/yikua/Documents/cse141l/NRM/basic_processor/TopLevel.sv(44): 'PC' already declared in this scope.
+** Error: C:/Users/yikua/Documents/cse141l/NRM/basic_processor/TopLevel.sv(54): (vlog-2730) Undefined variable: 'reg_exe'.
+
+** Error: C:/Users/yikua/Documents/cse141l/NRM/basic_processor/TopLevel.sv(55): (vlog-2730) Undefined variable: 'imm_exe'.
+
+** Error: C:/Users/yikua/Documents/cse141l/NRM/basic_processor/TopLevel.sv(56): (vlog-2730) Undefined variable: 'mem_to_reg'.
+
+** Error: C:/Users/yikua/Documents/cse141l/NRM/basic_processor/TopLevel.sv(57): (vlog-2730) Undefined variable: 'reg_to_mem'.
+
+** Error: C:/Users/yikua/Documents/cse141l/NRM/basic_processor/TopLevel.sv(58): (vlog-2730) Undefined variable: 'reg_to_acc'.
+
+** Error: C:/Users/yikua/Documents/cse141l/NRM/basic_processor/TopLevel.sv(59): (vlog-2730) Undefined variable: 'acc_to_reg'.
+
+** Error: C:/Users/yikua/Documents/cse141l/NRM/basic_processor/TopLevel.sv(61): (vlog-2730) Undefined variable: 'assign_val'.
+
+** Warning: C:/Users/yikua/Documents/cse141l/NRM/basic_processor/TopLevel.sv(69): (vlog-2600) [RDGN] - Redundant digits in numeric literal.
+
+** Warning: C:/Users/yikua/Documents/cse141l/NRM/basic_processor/TopLevel.sv(70): (vlog-2600) [RDGN] - Redundant digits in numeric literal.
+
+** Warning: C:/Users/yikua/Documents/cse141l/NRM/basic_processor/TopLevel.sv(71): (vlog-2600) [RDGN] - Redundant digits in numeric literal.
+
+** Warning: C:/Users/yikua/Documents/cse141l/NRM/basic_processor/TopLevel.sv(72): (vlog-2600) [RDGN] - Redundant digits in numeric literal.
+
+** Error: C:/Users/yikua/Documents/cse141l/NRM/basic_processor/TopLevel.sv(107): (vlog-2730) Undefined variable: 'BRANCH'.
+
+End time: 15:50:42 on Mar 05,2020, Elapsed time: 0:00:00
+Errors: 9, Warnings: 4
+
+} {6.0 8.0 9.0 10.0 11.0 12.0 13.0 14.0 15.0 16.0 17.0 18.0 19.0 20.0 29.0 30.0} {}} C:/Users/yikua/Documents/cse141l/NRM/basic_processor/InstROM.sv {1 {vlog -work work -sv C:/Users/yikua/Documents/cse141l/NRM/basic_processor/InstROM.sv
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+Start time: 15:50:41 on Mar 05,2020
+vlog -reportprogress 300 -work work -sv C:/Users/yikua/Documents/cse141l/NRM/basic_processor/InstROM.sv 
+-- Compiling module InstROM
+
+Top level modules:
+	InstROM
+End time: 15:50:41 on Mar 05,2020, Elapsed time: 0:00:00
+Errors: 0, Warnings: 0
+
+} {} {}} C:/Users/yikua/Documents/cse141l/NRM/basic_processor/Ctrl.sv {0 {vlog -work work -sv C:/Users/yikua/Documents/cse141l/NRM/basic_processor/Ctrl.sv
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+Start time: 15:50:42 on Mar 05,2020
+vlog -reportprogress 300 -work work -sv C:/Users/yikua/Documents/cse141l/NRM/basic_processor/Ctrl.sv 
+** Error: C:/Users/yikua/Documents/cse141l/NRM/basic_processor/Ctrl.sv(2): (vlog-13006) Could not find the package (definitions).  Design read will continue, but expect a cascade of errors after this failure.  Furthermore if you experience a vopt-7 error immediately before this error then please check the package names or the library search paths on the command line.
+
+** Error: C:/Users/yikua/Documents/cse141l/NRM/basic_processor/Ctrl.sv(35): (vlog-2730) Undefined variable: 'LW'.
+
+** Error: C:/Users/yikua/Documents/cse141l/NRM/basic_processor/Ctrl.sv(36): (vlog-2730) Undefined variable: 'SW'.
+
+** Error: C:/Users/yikua/Documents/cse141l/NRM/basic_processor/Ctrl.sv(37): (vlog-2730) Undefined variable: 'ASSIGN'.
+
+** Error: C:/Users/yikua/Documents/cse141l/NRM/basic_processor/Ctrl.sv(38): (vlog-2730) Undefined variable: 'CLRSC'.
+
+** Error: C:/Users/yikua/Documents/cse141l/NRM/basic_processor/Ctrl.sv(39): (vlog-2730) Undefined variable: 'MOV'.
+
+** Error: (vlog-13069) C:/Users/yikua/Documents/cse141l/NRM/basic_processor/Ctrl.sv(40): near "==": syntax error, unexpected ==.
+
+** Error: C:/Users/yikua/Documents/cse141l/NRM/basic_processor/Ctrl.sv(45): (vlog-2730) Undefined variable: 'JMP'.
+
+** Error: C:/Users/yikua/Documents/cse141l/NRM/basic_processor/Ctrl.sv(49): (vlog-2730) Undefined variable: 'ADD'.
+
+** Error: C:/Users/yikua/Documents/cse141l/NRM/basic_processor/Ctrl.sv(49): (vlog-2730) Undefined variable: 'SUB'.
+
+** Error: C:/Users/yikua/Documents/cse141l/NRM/basic_processor/Ctrl.sv(50): (vlog-2730) Undefined variable: 'BEQ'.
+
+** Error: C:/Users/yikua/Documents/cse141l/NRM/basic_processor/Ctrl.sv(50): (vlog-2730) Undefined variable: 'AND'.
+
+** Error: C:/Users/yikua/Documents/cse141l/NRM/basic_processor/Ctrl.sv(51): (vlog-2730) Undefined variable: 'OR'.
+
+** Error: C:/Users/yikua/Documents/cse141l/NRM/basic_processor/Ctrl.sv(51): (vlog-2730) Undefined variable: 'BGE'.
+
+** Error: C:/Users/yikua/Documents/cse141l/NRM/basic_processor/Ctrl.sv(52): (vlog-2730) Undefined variable: 'BNE'.
+
+End time: 15:50:42 on Mar 05,2020, Elapsed time: 0:00:00
+Errors: 15, Warnings: 0
+
+} {5.0 6.0 7.0 8.0 9.0 10.0 11.0 12.0 13.0 14.0 15.0 16.0 17.0 18.0 19.0 20.0 21.0 22.0 23.0 24.0 25.0 26.0 27.0 28.0 29.0 30.0 31.0 32.0 33.0 34.0} {}} C:/Users/yikua/Documents/cse141l/NRM/basic_processor/LUT.sv {0 {vlog -work work -sv C:/Users/yikua/Documents/cse141l/NRM/basic_processor/LUT.sv
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+Start time: 15:50:42 on Mar 05,2020
+vlog -reportprogress 300 -work work -sv C:/Users/yikua/Documents/cse141l/NRM/basic_processor/LUT.sv 
+-- Compiling module LUT
+** Error: C:/Users/yikua/Documents/cse141l/NRM/basic_processor/LUT.sv(12): (vlog-2730) Undefined variable: 'Target'.
+
+End time: 15:50:42 on Mar 05,2020, Elapsed time: 0:00:00
+Errors: 1, Warnings: 0
+
+} {6.0 7.0} {}} C:/Users/yikua/Documents/cse141l/NRM/basic_processor/LUTz.sv {0 {vlog -work work -sv C:/Users/yikua/Documents/cse141l/NRM/basic_processor/LUTz.sv
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+Start time: 15:50:42 on Mar 05,2020
+vlog -reportprogress 300 -work work -sv C:/Users/yikua/Documents/cse141l/NRM/basic_processor/LUTz.sv 
+-- Compiling module LUT
+** Error: (vlog-13069) C:/Users/yikua/Documents/cse141l/NRM/basic_processor/LUTz.sv(24): near "6": syntax error, unexpected INTEGER NUMBER.
+
+End time: 15:50:42 on Mar 05,2020, Elapsed time: 0:00:00
+Errors: 1, Warnings: 0
+
+} {6.0 7.0} {}} C:/Users/yikua/Documents/cse141l/NRM/basic_processor/TopLevel_tb.sv {1 {vlog -work work -sv C:/Users/yikua/Documents/cse141l/NRM/basic_processor/TopLevel_tb.sv
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+Start time: 15:50:40 on Mar 05,2020
+vlog -reportprogress 300 -work work -sv C:/Users/yikua/Documents/cse141l/NRM/basic_processor/TopLevel_tb.sv 
+-- Compiling module TopLevel_tb
+
+Top level modules:
+	TopLevel_tb
+End time: 15:50:40 on Mar 05,2020, Elapsed time: 0:00:00
+Errors: 0, Warnings: 0
+
+} {} {}} C:/Users/yikua/Documents/cse141l/NRM/basic_processor/data_mem.sv {1 {vlog -work work -sv C:/Users/yikua/Documents/cse141l/NRM/basic_processor/data_mem.sv
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+Start time: 15:50:40 on Mar 05,2020
+vlog -reportprogress 300 -work work -sv C:/Users/yikua/Documents/cse141l/NRM/basic_processor/data_mem.sv 
+-- Compiling module data_mem
+
+Top level modules:
+	data_mem
+End time: 15:50:40 on Mar 05,2020, Elapsed time: 0:00:00
+Errors: 0, Warnings: 0
+
+} {} {}} C:/Users/yikua/Documents/cse141l/NRM/basic_processor/LUTz_readmem.sv {0 {vlog -work work -sv C:/Users/yikua/Documents/cse141l/NRM/basic_processor/LUTz_readmem.sv
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+Start time: 15:50:42 on Mar 05,2020
+vlog -reportprogress 300 -work work -sv C:/Users/yikua/Documents/cse141l/NRM/basic_processor/LUTz_readmem.sv 
+-- Compiling module LUT
+** Error: (vlog-13069) C:/Users/yikua/Documents/cse141l/NRM/basic_processor/LUTz_readmem.sv(17): near "always_comb": syntax error, unexpected always_comb.
+
+End time: 15:50:42 on Mar 05,2020, Elapsed time: 0:00:00
+Errors: 1, Warnings: 0
+
+} {6.0 7.0} {}} C:/Users/yikua/Documents/cse141l/NRM/basic_processor/PC.sv {1 {vlog -work work -sv C:/Users/yikua/Documents/cse141l/NRM/basic_processor/PC.sv
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+Start time: 15:50:41 on Mar 05,2020
+vlog -reportprogress 300 -work work -sv C:/Users/yikua/Documents/cse141l/NRM/basic_processor/PC.sv 
+-- Compiling module PC
+
+Top level modules:
+	PC
+End time: 15:50:41 on Mar 05,2020, Elapsed time: 0:00:00
+Errors: 0, Warnings: 0
+
+} {} {}} C:/Users/yikua/Documents/cse141l/NRM/basic_processor/definitions.sv {0 vlog\ -work\ work\ -sv\ C:/Users/yikua/Documents/cse141l/NRM/basic_processor/definitions.sv\nModel\ Technology\ ModelSim\ PE\ Student\ Edition\ vlog\ 10.4a\ Compiler\ 2015.03\ Apr\ \ 7\ 2015\nStart\ time:\ 15:50:42\ on\ Mar\ 05,2020\nvlog\ -reportprogress\ 300\ -work\ work\ -sv\ C:/Users/yikua/Documents/cse141l/NRM/basic_processor/definitions.sv\ \n--\ Compiling\ package\ definitions\n**\ Error:\ (vlog-13069)\ C:/Users/yikua/Documents/cse141l/NRM/basic_processor/definitions.sv(23):\ near\ \"\;\":\ syntax\ error,\ unexpected\ '\;',\ expecting\ ','\ or\ '\}'.\n\n**\ Error:\ C:/Users/yikua/Documents/cse141l/NRM/basic_processor/definitions.sv(24):\ (vlog-13205)\ Syntax\ error\ found\ in\ the\ scope\ following\ 'SUB'.\ Is\ there\ a\ missing\ '::'?\n\nEnd\ time:\ 15:50:42\ on\ Mar\ 05,2020,\ Elapsed\ time:\ 0:00:00\nErrors:\ 2,\ Warnings:\ 0\n\n {6.0 7.0 8.0 9.0} {}} C:/Users/yikua/Documents/cse141l/NRM/basic_processor/inst_rom2.sv {1 {vlog -work work -sv C:/Users/yikua/Documents/cse141l/NRM/basic_processor/inst_rom2.sv
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+Start time: 15:50:41 on Mar 05,2020
+vlog -reportprogress 300 -work work -sv C:/Users/yikua/Documents/cse141l/NRM/basic_processor/inst_rom2.sv 
+-- Compiling module InstROM
+
+Top level modules:
+	InstROM
+End time: 15:50:41 on Mar 05,2020, Elapsed time: 0:00:00
+Errors: 0, Warnings: 0
+
+} {} {}} C:/Users/yikua/Documents/cse141l/NRM/basic_processor/reg_file.sv {1 {vlog -work work -sv C:/Users/yikua/Documents/cse141l/NRM/basic_processor/reg_file.sv
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+Start time: 15:50:41 on Mar 05,2020
+vlog -reportprogress 300 -work work -sv C:/Users/yikua/Documents/cse141l/NRM/basic_processor/reg_file.sv 
+-- Compiling module reg_file
+
+Top level modules:
+	reg_file
+End time: 15:50:41 on Mar 05,2020, Elapsed time: 0:00:00
+Errors: 0, Warnings: 0
+
+} {} {}} C:/Users/yikua/Documents/cse141l/NRM/basic_processor/IF.sv {1 {vlog -work work -sv C:/Users/yikua/Documents/cse141l/NRM/basic_processor/IF.sv
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+Start time: 15:50:41 on Mar 05,2020
+vlog -reportprogress 300 -work work -sv C:/Users/yikua/Documents/cse141l/NRM/basic_processor/IF.sv 
+-- Compiling module IF
+
+Top level modules:
+	IF
+End time: 15:50:41 on Mar 05,2020, Elapsed time: 0:00:00
+Errors: 0, Warnings: 0
+
+} {} {}} C:/Users/yikua/Documents/cse141l/NRM/basic_processor/implied_latch.sv {0 {vlog -work work -sv C:/Users/yikua/Documents/cse141l/NRM/basic_processor/implied_latch.sv
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+Start time: 15:50:42 on Mar 05,2020
+vlog -reportprogress 300 -work work -sv C:/Users/yikua/Documents/cse141l/NRM/basic_processor/implied_latch.sv 
+** Error: (vlog-13069) C:/Users/yikua/Documents/cse141l/NRM/basic_processor/implied_latch.sv(4): near "always_comb": syntax error, unexpected always_comb, expecting class.
+
+End time: 15:50:42 on Mar 05,2020, Elapsed time: 0:00:00
+Errors: 1, Warnings: 0
+
+} {5.0 6.0} {}}

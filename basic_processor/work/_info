@@ -1,0 +1,158 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/Modeltech_pe_edu_10.4a/examples
+vdata_mem
+Z0 DXx6 sv_std 3 std 0 22 WmjPaeP=7F5?QFXzJ>D[Q2
+Z1 !s110 1583452240
+!i10b 1
+!s100 K?RWS2j]8GMlMm^]PahFj0
+Ij5KZOmOfG^_cR^_j`_c@h3
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+!s105 data_mem_sv_unit
+S1
+Z3 dC:/Users/yikua/Documents/cse141l/NRM/basic_processor
+Z4 w1583210248
+8C:/Users/yikua/Documents/cse141l/NRM/basic_processor/data_mem.sv
+FC:/Users/yikua/Documents/cse141l/NRM/basic_processor/data_mem.sv
+L0 6
+Z5 OP;L;10.4a;61
+r1
+!s85 0
+31
+Z6 !s108 1583452240.000000
+!s107 C:/Users/yikua/Documents/cse141l/NRM/basic_processor/data_mem.sv|
+!s90 -reportprogress|300|-work|work|-sv|C:/Users/yikua/Documents/cse141l/NRM/basic_processor/data_mem.sv|
+!s101 -O0
+!i113 1
+Z7 o-work work -sv -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact -O0
+vIF
+R0
+Z8 !s110 1583452241
+!i10b 1
+!s100 XfE1ZhIjCKgbjYbjfi[m<3
+IV:QX99@g3]NjO1SJNUe^?0
+R2
+!s105 IF_sv_unit
+S1
+R3
+R4
+8C:/Users/yikua/Documents/cse141l/NRM/basic_processor/IF.sv
+FC:/Users/yikua/Documents/cse141l/NRM/basic_processor/IF.sv
+L0 8
+R5
+r1
+!s85 0
+31
+Z9 !s108 1583452241.000000
+!s107 C:/Users/yikua/Documents/cse141l/NRM/basic_processor/IF.sv|
+!s90 -reportprogress|300|-work|work|-sv|C:/Users/yikua/Documents/cse141l/NRM/basic_processor/IF.sv|
+!s101 -O0
+!i113 1
+R7
+n@i@f
+vInstROM
+R0
+R8
+!i10b 1
+!s100 LCEiU0;Hf3k@l[57iWDVZ1
+I>YijQTEnLU16nT0O:dMm83
+R2
+!s105 InstROM_sv_unit
+S1
+R3
+w1583452099
+8C:/Users/yikua/Documents/cse141l/NRM/basic_processor/InstROM.sv
+FC:/Users/yikua/Documents/cse141l/NRM/basic_processor/InstROM.sv
+L0 11
+R5
+r1
+!s85 0
+31
+R9
+!s107 C:/Users/yikua/Documents/cse141l/NRM/basic_processor/InstROM.sv|
+!s90 -reportprogress|300|-work|work|-sv|C:/Users/yikua/Documents/cse141l/NRM/basic_processor/InstROM.sv|
+!s101 -O0
+!i113 1
+R7
+n@inst@r@o@m
+vPC
+R0
+R8
+!i10b 1
+!s100 =iU?E@6>1UQ7YGG2HSLFQ0
+I>?a`Ln6EV<nlYkUHTKVEI2
+R2
+!s105 PC_sv_unit
+S1
+R3
+w1583450736
+8C:/Users/yikua/Documents/cse141l/NRM/basic_processor/PC.sv
+FC:/Users/yikua/Documents/cse141l/NRM/basic_processor/PC.sv
+L0 6
+R5
+r1
+!s85 0
+31
+R9
+!s107 C:/Users/yikua/Documents/cse141l/NRM/basic_processor/PC.sv|
+!s90 -reportprogress|300|-work|work|-sv|C:/Users/yikua/Documents/cse141l/NRM/basic_processor/PC.sv|
+!s101 -O0
+!i113 1
+R7
+n@p@c
+vreg_file
+R0
+R8
+!i10b 1
+!s100 2;KEoi;VzT7DLbniGHYDO3
+ICf<YgQh6[8eidi3T4XVTm1
+R2
+!s105 reg_file_sv_unit
+S1
+R3
+R4
+8C:/Users/yikua/Documents/cse141l/NRM/basic_processor/reg_file.sv
+FC:/Users/yikua/Documents/cse141l/NRM/basic_processor/reg_file.sv
+L0 7
+R5
+r1
+!s85 0
+31
+R9
+!s107 C:/Users/yikua/Documents/cse141l/NRM/basic_processor/reg_file.sv|
+!s90 -reportprogress|300|-work|work|-sv|C:/Users/yikua/Documents/cse141l/NRM/basic_processor/reg_file.sv|
+!s101 -O0
+!i113 1
+R7
+vTopLevel_tb
+R0
+R1
+!i10b 1
+!s100 zdNYz`ij:hnBL1N16RPEa2
+IIzRBbo3RSlmc7AZ66S6`D3
+R2
+!s105 TopLevel_tb_sv_unit
+S1
+R3
+R4
+8C:/Users/yikua/Documents/cse141l/NRM/basic_processor/TopLevel_tb.sv
+FC:/Users/yikua/Documents/cse141l/NRM/basic_processor/TopLevel_tb.sv
+L0 8
+R5
+r1
+!s85 0
+31
+R6
+!s107 C:/Users/yikua/Documents/cse141l/NRM/basic_processor/TopLevel_tb.sv|
+!s90 -reportprogress|300|-work|work|-sv|C:/Users/yikua/Documents/cse141l/NRM/basic_processor/TopLevel_tb.sv|
+!s101 -O0
+!i113 1
+R7
+n@top@level_tb

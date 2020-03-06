@@ -118,7 +118,7 @@ logic       SC_IN;         // carry register (loop with ALU)
 
 	LUT look_up_table (
 		.addr   (Instruction[4:0]),
-		.target (destination)
+		.Target (destination)
 	);
 	
 // count number of instructions executed
