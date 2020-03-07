@@ -10,15 +10,17 @@ always_comb
   case(addr)	
     // program 1	  
     5'b00000:  Target = 10'b0000010011;
-    5'b00001:	 Target = 10'b0000100000;
-    5'b00010:	 Target = 10'b0000010011;
-    5'b00011:	 Target = 10'b0000010011;
-    5'b00100:	 Target = 10'b0000111100;
-    5'b00101:	 Target = 10'b0000110010;
-    5'b00110:	 Target = 10'b0001001011;
-    5'b00111:	 Target = 10'b0001000001;
+    5'b00001:	 Target = 10'b0000100110;
+    5'b00010:	 Target = 10'b0000011001;
+    5'b00011:	 Target = 10'b0000100110;
+    5'b00100:	 Target = 10'b0000011001;
+    5'b00101:	 Target = 10'b0000011001;
+    5'b00110:	 Target = 10'b0001000001;
+    5'b00111:	 Target = 10'b0000110111;
+    5'b01000:  Target = 10'b0001010000;
+    5'b01001:  Target = 10'b0001000110;
 
-    // // program 2
+    // // program 2 NEED TO CHANGE BASED ON assembler output
     // 5'b00000:  Target = 10'b0000010110;
     // 5'b00001:	 Target = 10'b0001001110;
     // 5'b00010:	 Target = 10'b0001000001;

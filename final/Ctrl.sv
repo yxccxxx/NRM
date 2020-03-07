@@ -16,8 +16,9 @@ module Ctrl (
                reg_to_mem,     // store value from register to memory
                reg_to_acc,     // store value from register to accumulator
                acc_to_reg,     // store value from accumulator to register
-               assign_val,      // assign int to accumulator
+               assign_val,     // assign int to accumulator
                reg_wr_en,
+               done,         // finish running program
   output logic[ 3:0] reg_wr_addr
   );
 // jump on right shift that generates a zero
@@ -33,6 +34,7 @@ always_comb begin
   acc_to_reg = 0;
   assign_val = 0;
   reg_wr_en = 1;
+  done = 0;
   reg_wr_addr = 4'b1111;
 
   case(Instruction[8:5])
@@ -47,6 +49,7 @@ always_comb begin
         acc_to_reg = 1;
       end
     JMP: jump_en = 1;
+    DONE: done = 1;
     default:;
   endcase
 
@@ -62,10 +65,12 @@ always_comb begin
 
   if(Instruction[8:5] == BEQ || Instruction[8:5] == BGE || 
     Instruction[8:5] == BNE || Instruction [8:5] == CLRSC || 
-    Instruction[8:5] == SW)
+    Instruction[8:5] == SW || Instruction[8:5] == JMP ||
+    Instruction[8:5] == DONE)
       reg_wr_en = 0;
 
-  if (Instruction[8:5] == LW || Instruction[8:5] == SL || Instruction[8:5] == SR)
+  if (Instruction[8:5] == LW || Instruction[8:5] == SL || 
+    Instruction[8:5] == SR || (Instruction[8:5] == MOV && Instruction[4] == 1))
     reg_wr_addr = Instruction[3:0];
   
 end

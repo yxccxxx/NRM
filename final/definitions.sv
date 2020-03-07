@@ -34,6 +34,7 @@ typedef enum logic[3:0] {
     BNE = 4'b1011,
     CLRSC = 4'b1100,
     OR = 4'b1101,
+    DONE = 4'b1110,
     JMP = 4'b1111
 } op_mne;
 

@@ -25,7 +25,7 @@ assign out_reg = registers[raddr]; // the other input register
 always_ff @ (posedge CLK)
   // && waddr requires nonzero pointer address
   // if (write_en) if want to be able to write to address 0, as well
-  if (write_en && waddr)	                             
+  if (write_en)	                             
     registers[waddr] <= data_in;
 
 endmodule

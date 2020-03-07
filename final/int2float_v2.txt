@@ -22,6 +22,16 @@ mov 1, $r6 // copy the initial number
 
 mov 0, $r5
 bne 1, 0
+jmp check_while
+
+mov 0, $r6
+beq 1, 0
+jmp end_while
+
+check_while:
+
+mov 0, $r5
+bne 1, 0
 jmp begin_while
 
 mov 0, $r6
@@ -59,7 +69,6 @@ sl $r7
 clrsc
 sl $r7
 mov 0, $r7
-mov 1, $r7 // put exp at the right position of r7
 mov 1, $r2 // put exp at the right position of result
 
 // mantissa bits
@@ -127,3 +136,5 @@ mov 1, $r3 // store LSB to r3
 
 assign 3
 sw $r3 // store LSB back to memory
+
+done

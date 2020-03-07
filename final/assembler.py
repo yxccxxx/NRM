@@ -72,6 +72,13 @@ for i in range(3):
             w_file.write(return_rtype + '\n' )
             i += 1
             continue
+        elif instruction == "done":
+            opcode = "1110"
+            machine = "00000"
+            return_rtype = opcode + machine
+            w_file.write(return_rtype + '\n' )
+            i += 1
+            continue
 
         first_val = str_array[1]
         second_val = ''

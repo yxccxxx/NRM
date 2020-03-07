@@ -19,9 +19,7 @@ wire [ 7:0] ALU_out;       // ALU result
 wire [ 7:0] regWriteValue, // data in to reg file
             memWriteValue, // data in to data_memory
 	   	    Mem_Out;	   // data out from data_memory
-wire        MEM_READ,	   // data_memory read enable
-		    MEM_WRITE,	   // data_memory write enable
-			reg_wr_en,	   // reg_file write enable
+wire        reg_wr_en,	   // reg_file write enable
 			sc_clr,        // carry reg clear
 			sc_en,	       // carry reg enable
 		    SC_OUT,	       // to carry register
@@ -35,7 +33,8 @@ wire        MEM_READ,	   // data_memory read enable
 			reg_to_mem,
 			reg_to_acc,
 			acc_to_reg,
-			assign_val;
+			assign_val,
+			done;          // program finishes running
 wire [ 3:0] reg_wr_addr;
 logic[15:0] cycle_ct;	   // standalone; NOT PC!
 logic       SC_IN;         // carry register (loop with ALU)
@@ -47,6 +46,7 @@ logic       SC_IN;         // carry register (loop with ALU)
 		.jump_en           ,  // jump enable
 		.branch_en	       ,  // branch enable
 		.CLK        (CLK)  ,  // (CLK) is required in Verilog, optional in SystemVerilog
+		.done              ,  // program finishes running
 		.destination       ,  // jump destination
 		.halt              ,  // SystemVerilg shorthand for .halt(halt), 
 		.pc             	  // program count = index to instruction memory
@@ -66,8 +66,9 @@ logic       SC_IN;         // carry register (loop with ALU)
 		.reg_to_mem,     // store value from register to memory
 		.reg_to_acc,     // store value from register to accumulator
 		.acc_to_reg,     // store value from accumulator to register
-		.assign_val,      // assign value to accumulator
+		.assign_val,     // assign value to accumulator
 		.reg_wr_en,
+		.done,           // program finishes running
 		.reg_wr_addr
   	);
 
@@ -85,7 +86,7 @@ logic       SC_IN;         // carry register (loop with ALU)
 		.waddr     (reg_wr_addr)  , 
 		.data_in   (regWriteValue), 
 		.out_acc				  , 
-		.out_reg   (memWriteValue)
+		.out_reg   
 	);
 	// one pointer, two adjacent read accesses: (optional approach)
 	//	.raddrA ({Instruction[5:3],1'b0});
@@ -94,6 +95,7 @@ logic       SC_IN;         // carry register (loop with ALU)
 	// assign MEM_WRITE = (Instruction == 9'h111);       // mem_store command
 	assign load_inst = (Instruction[8:5] == 4'b0101);
 	assign regWriteValue = load_inst? Mem_Out : ALU_out;  // 2:1 switch into reg_file
+	assign store_inst = (Instruction[8:5] == 4'b0110);
 	assign imm_in = (Instruction[8:5] == 4'b1001) ? ({3'b000, Instruction[4:0]}) : ({4'b0000, Instruction[3:0]});
     ALU ALU  (
 	  	.reg_acc  (out_acc),
@@ -118,7 +120,7 @@ logic       SC_IN;         // carry register (loop with ALU)
 		.DataAddress  (out_acc), 
 		.ReadMem      (load_inst),    
 		.WriteMem     (store_inst), 
-		.DataIn       (memWriteValue), 
+		.DataIn       (out_reg), 
 		.DataOut      (Mem_Out) 
 	);
 

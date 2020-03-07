@@ -11,10 +11,11 @@ result = 0
 
 # exp
 count = 0
-while a != 1:   # !(MSB == 0 && LSB == 1)
-                # MSB != 0 || LSB != 1
-    a = a >> 1
-    count += 1
+if a != 0:
+    while a != 1:   # !(MSB == 0 && LSB == 1)
+                    # MSB != 0 || LSB != 1
+        a = a >> 1
+        count += 1
 exp = count + 15
 i = 0
 while(i < 2):

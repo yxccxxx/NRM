@@ -8,6 +8,7 @@ module PC(
         jump_en,		// relative
 		branch_en,
 		CLK,
+		done,           // program finishes running
   input [9:0] destination, // jump destination
   output logic halt, 	// program halts
   output logic[ 9:0] pc
@@ -20,7 +21,7 @@ always @(posedge CLK)
   end
   else begin
 	/** need to modify!!!!!! **/
-    if(pc>84) 
+    if(done) 
 	  halt <= 1;		 // just a randomly chosen number 
 	else if(jump_en) 
 	  pc <= destination;

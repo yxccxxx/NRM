@@ -38,9 +38,9 @@ module ALU(
       end
     SUB: begin
       if(reg_exe == 1)
-        {SC_OUT, OUT} = {1'b0,reg_acc} + (~reg_in) + SC_IN;
+        {SC_OUT, OUT} = {1'b0,reg_acc} - reg_in + SC_IN;
       else
-        {SC_OUT, OUT} = {1'b0,reg_acc} + (~imm_in) + SC_IN;
+        {SC_OUT, OUT} = {1'b0,reg_acc} - imm_in + SC_IN;
 	    end
     BEQ: begin
       if(reg_exe == 1) begin
@@ -56,8 +56,8 @@ module ALU(
           branch_en = 1; // pc = pc + 2
         end
       end
-    SL: {SC_OUT, OUT} = {reg_acc, SC_IN}; 
-    SR: {OUT, SC_OUT} = {SC_IN, reg_acc}; 
+    SL: {SC_OUT, OUT} = {reg_in, SC_IN}; 
+    SR: {OUT, SC_OUT} = {SC_IN, reg_in}; 
     LW: ;
     SW: OUT = reg_in;
     MOV: begin
