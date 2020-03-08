@@ -122,3 +122,5 @@ assign 6
 sw $r0
 assign 7
 sw $r1
+
+done

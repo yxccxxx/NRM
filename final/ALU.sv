@@ -69,7 +69,7 @@ module ALU(
     ASSIGN: OUT = imm_in;
     BGE: begin
       if(reg_exe == 1) begin
-        if(reg_in >= reg_acc)
+        if(reg_acc >= reg_in)
           branch_en = 0; // pc = pc + 1, move to jump
         else
           branch_en = 1; // pc = pc + 2

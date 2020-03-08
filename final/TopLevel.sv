@@ -100,7 +100,7 @@ logic       SC_IN;         // carry register (loop with ALU)
     ALU ALU  (
 	  	.reg_acc  (out_acc),
 	  	.reg_in   (out_reg), 
-	  	.imm_in   ({4'b0000, Instruction[3:0]}),
+	  	.imm_in   ,
 		.OP      (Instruction[8:5]),
 	  	.SC_IN   ,
 	  	.reg_exe,

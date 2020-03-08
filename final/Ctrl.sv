@@ -72,6 +72,10 @@ always_comb begin
   if (Instruction[8:5] == LW || Instruction[8:5] == SL || 
     Instruction[8:5] == SR || (Instruction[8:5] == MOV && Instruction[4] == 1))
     reg_wr_addr = Instruction[3:0];
+
+  if (Instruction[8:5] == ADD || Instruction[8:5] == SUB ||
+    Instruction[8:5] == SL || Instruction[8:5] == SR)
+    sc_en = 1;
   
 end
   // if(Instruction[8:5] == JMP)
