@@ -17,7 +17,7 @@ logic       sign,
 logic[ 7:0] ctr;				 // cycle counter
 // memory core
 logic[ 7:0] dm_out, dm_in, dm_addr;
-data_mem dm1(.CLK(clk), .ReadMem(1'b1), .WriteMem(1'b0), 
+data_mem data_mem(.CLK(clk), .ReadMem(1'b1), .WriteMem(1'b0), 
   .DataOut(dm_out), .DataIn(dm_in), .DataAddress(dm_addr));
 
 always @(posedge clk) begin
@@ -35,7 +35,7 @@ end
 // negatives will require sign-mag to two's comp conversion
 always begin
   wait(req_q && !req)	    // edge detector (falling)
-  flt_in   = {dm1.mem_core[4],dm1.mem_core[5]};
+  flt_in   = {data_mem.core[4],data_mem.core[5]};
   sign     = flt_in[15];
   exp      = flt_in[14:10];		// biased exponent
   int_frac = {31'b0,|flt_in[14:10],flt_in[ 9: 0]};
@@ -54,7 +54,7 @@ always begin
 // limit overflow to max. positive
   if(int_frac[41:40]) int_frac[39:25] = 15'h7fff;
   int_out  = int_frac[39:25];    // exp bias = 15; 10 bits of fraction
-  {dm1.mem_core[6],dm1.mem_core[7]} = int_out; // store
+  {data_mem.core[6],data_mem.core[7]} = int_out; // store
   #10ns ack = '1;				 // send ack pulse to test bench
   #20ns ack = '0;
 end

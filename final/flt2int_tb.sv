@@ -11,7 +11,11 @@ module flt2int_tb();
   wire  ack;					 // from DUT
   logic req;
   int count, agree;
-  flt2int f2(.*);				 // DUT goes here
+  TopLevel f2(
+    .CLK  (clk),			 //  rename module & ports
+	  .start(req),			 //  as necessary
+    .halt (ack)
+  );				 // DUT goes here
 									    
   always begin
     #5ns clk = 1;
@@ -63,7 +67,7 @@ module flt2int_tb();
   end
   task disp();
     #10ns req = '1;
-    {f2.dm1.mem_core[4],f2.dm1.mem_core[5]} = flt_in;
+    {f2.data_mem.core[4],f2.data_mem.core[5]} = flt_in;
     exp = flt_in[14:10]-15;	     // remove exponent bias      
     mant[10] = |flt_in[14:10];	 // restore hidden bit
     mant[9:0] = flt_in[ 9: 0];	 // parse mantissa fraction
@@ -73,11 +77,12 @@ module flt2int_tb();
 	int_equiv = mant2 * 2**exp;
 	if(int_equiv > 2**15-1) int_equiv = 2**15-1; // limiter
 	int_out   = int_equiv;
+    #20ns $display("float input = %b",flt_in);
     #20ns $display("%f * 2**%d = %f = %d",mant2,exp,int_equiv,int_out);
-    #20ns $display("from DUT = %b = %d",{f2.dm1.mem_core[6],f2.dm1.mem_core[7]},
-        {f2.dm1.mem_core[6],f2.dm1.mem_core[7]});
+    #20ns $display("from DUT = %b = %d",{f2.data_mem.core[6],f2.data_mem.core[7]},
+        {f2.data_mem.core[6],f2.data_mem.core[7]});
 	count++;
-	if(int_out == {f2.dm1.mem_core[6],f2.dm1.mem_core[7]}) agree++;
+	if(int_out == {f2.data_mem.core[6],f2.data_mem.core[7]}) agree++;
 	$display();
   endtask
 endmodule

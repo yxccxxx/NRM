@@ -75,7 +75,7 @@ module ALU(
           branch_en = 1; // pc = pc + 2
         end
       else begin
-        if(imm_in >= reg_acc)
+        if(reg_acc >= imm_in)
           branch_en = 0; // pc = pc + 1, move to jump
         else
           branch_en = 1; // pc = pc + 2

@@ -18,8 +18,8 @@ add 1 4
 mov 1 $r0
 
 // compare exp with 14, if smaller, return 0
-assign 14
-bge 0 $r2
+mov 0 $r2
+bge 1 14
 jmp nonzero
 assign 0
 mov 1 $r0
@@ -29,14 +29,35 @@ jmp end
 // nonzero case
 nonzero:
 
-// compare exp with 25. If greater, left shift 
-assign 25
+// compare exp with 24. If not greater, right shift 
+assign 24
 bge 0 $r2
-jmp left_shift
+jmp right_shift
 
-// get the numer of bit to right shift, store in r3
+// left shift, first get the number of bits to shift
+mov 0 $r2
+clrsc
+sub 1 12
+clrsc
+sub 1 13
+
+// left shift loop
+left_shift_loop:
+beq 1 0
+jmp end
+clrsc
+sl $r1
+sl $r0
+clrsc
+sub 1 1
+jmp left_shift_loop
+
+// right shift, get the numer of bit to right shift, store in r3
+right_shift:
 clrsc
 sub 0 $r2
+clrsc
+add 1 1
 mov 1 $r3
 
 // r4 r5 are two factors two determine whether to round up
@@ -57,7 +78,7 @@ mov 0 $r1
 and 1 1
 or 0 $r5
 mov 1 $r5
-jmp right_shift
+jmp right_shift_one_bit
 
 // put the first fraction bit to r4
 first_fraction:
@@ -65,8 +86,8 @@ mov 0 $r1
 and 1 1
 mov 1 $r4
 
-// right shift the mantissa 
-right_shift:
+// right shift the mantissa by one bit
+right_shift_one_bit:
 clrsc
 sr $r0
 sr $r1
@@ -96,27 +117,8 @@ mov 1 $r1
 mov 0 $r0
 add 1 0
 mov 1 $r0
-jmp end
 
-// left shift, first get the number of bits to shift
-left_shift:
-mov 0 $r2
-clrsc
-sub 1 12
-clrsc
-sub 1 13
-
-// left shift loop
-left_shift_loop:
-beq 1 0
-jmp end
-clrsc
-sl $r1
-sl $r0
-clrsc
-sub 1 1
-jmp left_shift_loop
-
+// store back to memory
 end:
 assign 6
 sw $r0
