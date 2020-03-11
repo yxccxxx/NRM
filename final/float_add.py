@@ -1,6 +1,6 @@
-x = 0b0100100011100000 # 9.75
+x = 0b0011010100100100 # 9.75
 # x = 0b0100101111100000 # 15.75
-y = 0b0011100010000000 # 0.5625
+y = 0b0101111010000001 # 0.5625
 
 x_exp = (x & 0b0111110000000000) >> 10
 y_exp = (y & 0b0111110000000000) >> 10 
@@ -19,7 +19,7 @@ elif x_exp < y_exp:
     res_exp = y_exp
 
 res_mantissa = x_mantissa + y_mantissa
-if res_mantissa >= 0b100000000000:
+if res_mantissa >= 0b100000000000: # 0b10_0000000000
     res_mantissa = res_mantissa >> 1
     res_exp = res_exp + 1
 

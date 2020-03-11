@@ -94,17 +94,17 @@ module fltflt_tb();
 	t1_test.data_mem.core[129] = flt1[ 7:0];      // LSW of incoming flt
     t1_test.data_mem.core[130] = flt2[15:8];      // MSW of incoming flt
 	t1_test.data_mem.core[131] = flt2[ 7:0];      // LSW of incoming flt
-    t1.data_mem.core[128] = flt1[15:8];           // MSW of incoming flt
-	t1.data_mem.core[129] = flt1[ 7:0];           // LSW of incoming flt
-    t1.data_mem.core[130] = flt2[15:8];           // MSW of incoming flt
-	t1.data_mem.core[131] = flt2[ 7:0];           // LSW of incoming flt
+    t1.data_mem.core[8] = flt1[15:8];           // MSW of incoming flt
+	t1.data_mem.core[9] = flt1[ 7:0];           // LSW of incoming flt
+    t1.data_mem.core[10] = flt2[15:8];           // MSW of incoming flt
+	t1.data_mem.core[11] = flt2[ 7:0];           // LSW of incoming flt
 	#20ns reset = 1'b0;   // release reset
 	wait(done);                                         // wait for your done flag
 // read results from test DUT and your DUT
 	flt3_test[15:8] = t1_test.data_mem.core[132];	// my result upper bits
 	flt3_test[ 7:0] = t1_test.data_mem.core[133]; 
-	flt3[15:8]      = t1.data_mem.core[132];		// your result upper bits
-	flt3[ 7:0]      = t1.data_mem.core[133];
+	flt3[15:8]      = t1.data_mem.core[12];		// your result upper bits
+	flt3[ 7:0]      = t1.data_mem.core[13];
     flt3_exp        = flt3[14:10]-15;			        // your debiased exponent
 	flt3_mant       = {|flt3[14:10],flt3[9:0]};		    // your mantissa w/ hidden bit
     flt3_test_exp   = flt3_test[14:10]-15;

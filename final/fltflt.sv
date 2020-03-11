@@ -27,21 +27,21 @@ module fltflt(
  logic       [7:0]  DataIn;			
  logic       [7:0]  DataOut;			
 
-  data_mem data_mem1(.*);
+  data_mem data_mem(.*);
 
   always @(posedge clk) begin	 :main
     if(reset) begin
 	  guard  = 1'b0;
 	  round  = 1'b0;
 	  sticky = 1'b0;
-	  sign1  = data_mem1.my_memory[128][7];			 // load operands from data_mem
-	  sign2  = data_mem1.my_memory[130][7];
-      exp1   = data_mem1.my_memory[128][6:2];
-	  exp2   = data_mem1.my_memory[130][6:2];
-	  nil1   = !data_mem1.my_memory[128][6:2];	     // zero exp trap
-	  nil2   = !data_mem1.my_memory[130][6:2];		 // zero exp trap
-	  mant1  = {data_mem1.my_memory[128][1:0],data_mem1.my_memory[129]};
-	  mant2   = {data_mem1.my_memory[130][1:0],data_mem1.my_memory[131]};
+	  sign1  = data_mem.core[128][7];			 // load operands from data_mem
+	  sign2  = data_mem.core[130][7];
+      exp1   = data_mem.core[128][6:2];
+	  exp2   = data_mem.core[130][6:2];
+	  nil1   = !data_mem.core[128][6:2];	     // zero exp trap
+	  nil2   = !data_mem.core[130][6:2];		 // zero exp trap
+	  mant1  = {data_mem.core[128][1:0],data_mem.core[129]};
+	  mant2   = {data_mem.core[130][1:0],data_mem.core[131]};
 	  done   = 1'b0;
     end
 	else begin	  :nonreset
@@ -147,11 +147,11 @@ module fltflt(
 		end
       end :netsub
 
-// now store results into specified my_memory addresses so that the testbench
+// now store results into specified core addresses so that the testbench
 //  can read them
-      data_mem1.my_memory[132][7]								=	   sign3; 
-      data_mem1.my_memory[132][6:2]							    =	   exp3 ; 
-      {data_mem1.my_memory[132][1:0],data_mem1.my_memory[133]}  =	   mant3; 
+      data_mem.core[132][7]								=	   sign3; 
+      data_mem.core[132][6:2]							    =	   exp3 ; 
+      {data_mem.core[132][1:0],data_mem.core[133]}  =	   mant3; 
 	  done = 1'b1;															     
 	end	 :nonreset
   end  :main
