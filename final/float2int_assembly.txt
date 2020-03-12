@@ -29,6 +29,22 @@ jmp end
 // nonzero case
 nonzero:
 
+// compare exp with 30 , if greater or equal, return 2^15 - 1
+assign 29
+bge 0 $r2
+jmp in_range
+assign 0
+clrsc
+sub 1 1
+mov 1 $r1
+mov 1 $r0
+clrsc
+sr $r0
+jmp end
+
+// in range
+in_range:
+
 // compare exp with 24. If not greater, right shift 
 assign 24
 bge 0 $r2

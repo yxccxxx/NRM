@@ -37,10 +37,15 @@ module ALU(
         {SC_OUT, OUT} = {1'b0,reg_acc} + imm_in + SC_IN;
       end
     SUB: begin
+      // if(reg_exe == 1)
+      //   {SC_OUT, OUT} = {1'b0,reg_acc} - reg_in + SC_IN;
+      // else
+      //   {SC_OUT, OUT} = {1'b0,reg_acc} - imm_in + SC_IN;
       if(reg_exe == 1)
-        {SC_OUT, OUT} = {1'b0,reg_acc} - reg_in + SC_IN;
-      else
-        {SC_OUT, OUT} = {1'b0,reg_acc} - imm_in + SC_IN;
+        {SC_OUT, OUT} = {1'b1, reg_acc} - reg_in - SC_IN;
+	    else
+        {SC_OUT, OUT} = {1'b1, reg_acc} - imm_in - SC_IN;
+      SC_OUT = ~SC_OUT；
 	    end
     BEQ: begin
       if(reg_exe == 1) begin
