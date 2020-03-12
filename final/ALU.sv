@@ -45,7 +45,7 @@ module ALU(
         {SC_OUT, OUT} = {1'b1, reg_acc} - reg_in - SC_IN;
 	    else
         {SC_OUT, OUT} = {1'b1, reg_acc} - imm_in - SC_IN;
-      SC_OUT = ~SC_OUT；
+      SC_OUT = ~SC_OUT;
 	    end
     BEQ: begin
       if(reg_exe == 1) begin
