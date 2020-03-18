@@ -169,6 +169,25 @@ clrsc
 add 0, $r10
 mov 1, $r10 // result = (res_exp << 10) + res_mantissa
 
+// check the sign bit of MSB
+mov 1, $r9
+clrsc
+sl $r9
+assign 0
+sl $r15
+beq 1, 0
+jmp end
+
+// overflow
+assign 0
+clrsc
+sub 1 1
+mov 1 $r11
+mov 1 $r10
+clrsc
+sr $r10
+
+end:
 assign 12 // store the results back to memory
 sw $r10
 

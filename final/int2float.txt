@@ -140,10 +140,12 @@ add 0, $r9
 mov 1, $r11
 
 mov 0, $r11
+clrsc
 sub 0, $r1
 mov 1, $r12
 
 mov 0, $r1
+clrsc
 sub 0, $r9
 mov 1, $r13 // 103
 

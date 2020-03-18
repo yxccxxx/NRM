@@ -1,0 +1,230 @@
+// Assembly code for int2float program
+// r0, r1 stores the input short retrieved from memory
+// r2, r3 stores the result value
+
+assign 0
+lw $r0  // load MSB of integer X into $r0
+assign 1
+lw $r1 // load LSB of integer X into $r1
+
+// clear r2, r3 to be 0
+assign 0
+mov 1, $r2
+mov 1, $r3
+
+mov 0, $r0
+bne 1, 0
+jmp non_zero
+
+mov 0, $r1
+beq 1, 0
+jmp end
+
+non_zero:
+
+assign 0
+mov 1, $r4 // count = 0
+
+mov 0, $r0
+mov 1, $r5
+mov 0, $r1
+mov 1, $r6 // copy the initial number
+
+mov 0, $r5
+bne 1, 0
+jmp check_while
+
+mov 0, $r6
+beq 1, 0
+jmp end_while
+
+check_while:
+
+mov 0, $r5
+bne 1, 0
+jmp begin_while
+
+mov 0, $r6
+beq 1, 1
+jmp end_while
+
+begin_while:
+
+// a = a >> 1
+clrsc
+sr $r5
+sr $r6
+
+mov 0, $r4
+clrsc
+add 1, 1
+mov 1, $r4 // count += 1
+
+mov 0, $r5
+bne 1, 0
+jmp begin_while
+
+mov 0, $r6
+bne 1, 1
+jmp begin_while
+
+end_while:
+mov 0, $r4
+clrsc
+add 1, 15
+mov 1, $r7 // exp = count + 15
+
+clrsc
+sl $r7
+clrsc
+sl $r7
+mov 0, $r7
+mov 1, $r2 // put exp at the right position of result
+
+// mantissa bits
+assign 16
+clrsc
+sub 0, $r4
+mov 1, $r4 // store 16 - count in r4
+
+mov 0, $r4
+beq 1, 0
+jmp end_shifts_1
+
+// mantissa = init << (16 - count)
+begin_shifts_1:
+
+clrsc
+sl $r1
+sl $r0
+
+mov 0, $r4
+clrsc
+sub 1, 1
+mov 1, $r4
+
+mov 0, $r4
+bne 1, 0
+jmp begin_shifts_1
+
+end_shifts_1:
+
+// decide whether we need to add carry in to the result
+// r8 stores the value we need to plus to get mantissa + 1
+assign 31
+clrsc
+add 1, 1
+mov 1, $r8
+clrsc
+sl $r8
+
+// r9 stores last 2 digits of mantissa bits
+assign 31
+clrsc
+add 1, 1
+add 1, 15
+add 1, 1
+mov 1, $r9
+clrsc
+sl $r9
+clrsc
+sl $r9
+mov 0, $r9
+and 0, $r1
+mov 1, $r9
+
+// r11 stores r9 + r8, r10 unused
+mov 0, $r8
+clrsc
+add 0, $r9
+mov 1, $r11
+
+mov 0, $r11
+clrsc
+sub 0, $r1
+mov 1, $r12
+
+mov 0, $r1
+clrsc
+sub 0, $r9
+mov 1, $r13 // 103
+
+// clear r8 to be 0
+assign 0
+mov 1, $r8 // 105
+
+mov 0, $r12
+bge 0, $r13 // 106
+jmp more_carry // 107
+
+// r12 < r13 -> need to overflow
+assign 1
+mov 1, $r8
+jmp end_carry
+
+more_carry:
+mov 0, $r12 // 112
+bne 0, $r13
+jmp end_carry
+
+clrsc
+sl $r9
+mov 0, $r9
+beq 1, 0
+jmp end_carry
+
+assign 1
+mov 1, $r8
+
+end_carry:
+// end carry
+
+assign 6
+mov 1, $r4 // assign 6 as count
+
+mov 0, $r4
+beq 1, 0
+jmp end_shifts_2
+
+begin_shifts_2:
+
+clrsc
+sr $r0
+sr $r1
+
+mov 0, $r4
+clrsc
+sub 1, 1
+mov 1, $r4
+
+mov 0, $r4
+bne 1, 0
+jmp begin_shifts_2 // mantissa = mantissa >> 6
+
+end_shifts_2:
+
+mov 0, $r2
+clrsc
+add 0, $r0
+mov 1, $r2 // get MSB and store it to r2
+
+mov 0, $r1
+mov 1, $r3 // store LSB to r3
+
+mov 0, $r3
+clrsc
+add 0, $r8
+mov 1, $r3
+mov 0, $r2
+add 1, 0
+mov 1, $r2
+
+end:
+
+assign 2
+sw $r2 // store MSB back to memory
+
+assign 3
+sw $r3 // store LSB back to memory
+
+done

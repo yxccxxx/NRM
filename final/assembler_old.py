@@ -1,8 +1,10 @@
+
 print('Running Lab3:')
 print("label jump-to    ", "current address    ", "label address")
 
 filenames = ["int2float_v2.txt", "float2int_assembly.txt", "float_add_v2.txt"]
 out_files = ["int2float_machine.txt", "float2int_machine.txt", "float_add_machine.txt"]
+labels = {}
 
 for i in range(3):
     print("\n")
@@ -11,21 +13,15 @@ for i in range(3):
     #w_file is the file we are writing to
     w_file = open(out_files[i], "w")
     cur_file = []
-    labels = {}
-    lut = []
-
       
     with open(filenames[i], 'r') as f:
         i = 0
-        num_of_label = 0
         for line in f:
             cur_file.append(line)
 
             if ":" in line:
                 line_length = len(line)
-                labels[line[0:line_length-2]] = (num_of_label, i)
-                lut.append(i)
-                num_of_label += 1
+                labels[line[0:line_length-2]] = i
                 continue
             elif line == "" or line == "\n":
                 continue 
@@ -33,9 +29,9 @@ for i in range(3):
                 continue
             else:
                 i += 1
-    for i in range(len(lut)):
-        print("5'b{:05b}:    Target = 10'b{:010b};".format(i, lut[i]))
+
     i = 0
+    label_num = 0
     for line in cur_file:
         # skip empty line, labels and comments
         if line == "" or line == "\n":
@@ -50,12 +46,12 @@ for i in range(3):
 
         if instruction == "jmp":
             opcode = "1111"
-            value = labels[str_array[1]]
-            machine = '{0:05b}'.format(value[0])
+            machine = '{0:05b}'.format(label_num)
+            label_num += 1
             return_rtype = opcode + machine
             w_file.write(return_rtype + '\n' )
             # label / current address / label address
-            # print(str_array[1], "    ", machine, "    ", '{0:010b}'.format(labels[str_array[1]]))
+            print(str_array[1], "    ", machine, "    ", '{0:010b}'.format(labels[str_array[1]]))
             # delta = labels[first_val] - i
             # if delta < 0:
             #     delta = 0b1111111 - abs(delta) + 1
